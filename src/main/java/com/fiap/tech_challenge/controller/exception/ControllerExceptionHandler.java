@@ -2,12 +2,14 @@ package com.fiap.tech_challenge.controller.exception;
 
 import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
 import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
-import com.fiap.tech_challenge.exceptions.UserNotFoundException;
+import com.fiap.tech_challenge.exceptions.NotFoundException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -32,9 +34,15 @@ public class ControllerExceptionHandler {
         return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(value = BAD_REQUEST)
-    public ErrorResponseDto userNotFoundHandleException(UserNotFoundException e) {
+    public ErrorResponseDto userNotFoundHandleException(NotFoundException e) {
+        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    @ResponseStatus(value = BAD_REQUEST)
+    public ErrorResponseDto constraintViolationHandleException(SQLIntegrityConstraintViolationException e) {
         return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
     }
 

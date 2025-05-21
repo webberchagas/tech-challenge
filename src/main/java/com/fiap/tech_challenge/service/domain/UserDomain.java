@@ -19,13 +19,22 @@ public class UserDomain {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<AddressDomain> address;
     private UserType userType;
+    private List<AddressDomain> address;
 
 
     public void createUserSave() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void updateUser(UserDomain newDataUserDomain) {
+        this.updatedAt = LocalDateTime.now();
+        this.name = newDataUserDomain.getName();
+        this.phone = newDataUserDomain.getPhone();
+        this.email = newDataUserDomain.getEmail();
+        this.userType= newDataUserDomain.getUserType();
+        this.documentNumber = newDataUserDomain.getDocumentNumber();
     }
 
 }

@@ -1,6 +1,5 @@
 package com.fiap.tech_challenge.service.domain;
 
-import com.fiap.tech_challenge.model.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,10 +19,23 @@ public class AddressDomain {
     private String postalCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private UserEntity user;
+    private UserDomain user;
 
     public void createDateAddressSave() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+
+    public void updateAddress(AddressDomain addressDomain) {
+        this.updatedAt = LocalDateTime.now();
+        this.street = addressDomain.getStreet();
+        this.number = addressDomain.getNumber();
+        this.complement = addressDomain.getComplement();
+        this.neighborhood = addressDomain.getNeighborhood();
+        this.city = addressDomain.getCity();
+        this.state = addressDomain.getState();
+        this.country = addressDomain.getCountry();
+        this.postalCode = addressDomain.getPostalCode();
+    }
+
 }

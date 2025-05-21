@@ -44,13 +44,17 @@ public class UserEntity {
     @Column(name = "updated_at", nullable = true)
     private LocalDateTime updatedAt;
 
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<AddressEntity> address;
 
-   public void setUserIdInAddress(){
-                if (address != null) {
-                address.forEach(value -> value.setUserInAddress(this));
-            }
-   }
+    public void setUserIdInAddress() {
+        if (address != null) {
+            address.forEach(value -> value.setUserInAddress(this));
+        }
+    }
+
+    public void createNewPassword(String newPassword) {
+        this.password = newPassword;
+    }
 
 }

@@ -35,7 +35,7 @@ public class AddressRequestDto {
     private String state;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Country of the user", example = "Brazil")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Country of the user", example = "Brasil")
     private String country;
 
     @NotEmpty

@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
+    private String userId;
     private String name;
     private String documentNumber;
     private String email;

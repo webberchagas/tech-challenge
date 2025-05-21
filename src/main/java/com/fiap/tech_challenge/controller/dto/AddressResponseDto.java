@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressResponseDto {
+    private String addressId;
     private String street;
     private String number;
     private String complement;

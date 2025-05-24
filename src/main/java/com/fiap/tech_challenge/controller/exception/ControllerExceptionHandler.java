@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(UserAlreadyRegisteredException.class)
+    @ExceptionHandler({UserAlreadyRegisteredException.class, })
     @ResponseStatus(value = BAD_REQUEST)
     public ErrorResponseDto userAlreadyRegisteredHandleException(UserAlreadyRegisteredException e) {
         return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
@@ -35,9 +36,9 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(value = BAD_REQUEST)
+    @ResponseStatus(value = NOT_FOUND)
     public ErrorResponseDto userNotFoundHandleException(NotFoundException e) {
-        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
+        return new ErrorResponseDto(e.getMessage(), NOT_FOUND.name());
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fiap</groupId>
-	<artifactId>ms-user-management-api</artifactId>
+	<artifactId>tech-challenge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ms-user-management-api</name>
+	<name>tech-challenge</name>
 	<description>Restaurant App User Management API</description>
 	<url/>
 	<licenses>

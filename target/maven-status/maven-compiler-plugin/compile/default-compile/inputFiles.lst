@@ -1,6 +1,7 @@
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/TechChallengeApplication.java
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/AddressController.java
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/LoginController.java
+/home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/UserAPI.java
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/UserController.java
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/dto/AddressRequestDto.java
 /home/may/GitHub/tech-challenge/src/main/java/com/fiap/tech_challenge/controller/dto/AddressResponseDto.java

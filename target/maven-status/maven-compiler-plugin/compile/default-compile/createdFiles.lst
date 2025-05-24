@@ -46,5 +46,6 @@ com/fiap/tech_challenge/service/DeleteUserService.class
 com/fiap/tech_challenge/service/login/LoginService.class
 com/fiap/tech_challenge/model/UserEntity$UserEntityBuilder.class
 com/fiap/tech_challenge/TechChallengeApplication.class
+com/fiap/tech_challenge/controller/UserAPI.class
 com/fiap/tech_challenge/controller/mapper/UserMapper.class
 com/fiap/tech_challenge/repository/AddressRepository.class

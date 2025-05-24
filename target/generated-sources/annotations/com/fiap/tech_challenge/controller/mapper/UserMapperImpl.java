@@ -3,7 +3,6 @@ package com.fiap.tech_challenge.controller.mapper;
 import com.fiap.tech_challenge.controller.dto.AddressRequestDto;
 import com.fiap.tech_challenge.controller.dto.UserRequestDto;
 import com.fiap.tech_challenge.controller.type.UserType;
-import com.fiap.tech_challenge.model.UserEntity;
 import com.fiap.tech_challenge.service.domain.AddressDomain;
 import com.fiap.tech_challenge.service.domain.UserDomain;
 import java.time.LocalDateTime;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-14T23:23:42-0300",
+    date = "2025-05-23T21:55:52-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.7 (Arch Linux)"
 )
 @Component
@@ -46,7 +45,7 @@ public class UserMapperImpl implements UserMapper {
         LocalDateTime createdAt = null;
         LocalDateTime updatedAt = null;
 
-        UserDomain userDomain = new UserDomain( userId, name, email, documentNumber, phone, password, createdAt, updatedAt, address, userType );
+        UserDomain userDomain = new UserDomain( userId, name, email, documentNumber, phone, password, createdAt, updatedAt, userType, address );
 
         return userDomain;
     }
@@ -77,7 +76,7 @@ public class UserMapperImpl implements UserMapper {
         String addressId = null;
         LocalDateTime createdAt = null;
         LocalDateTime updatedAt = null;
-        UserEntity user = null;
+        UserDomain user = null;
 
         AddressDomain addressDomain = new AddressDomain( addressId, street, number, complement, neighborhood, city, state, country, postalCode, createdAt, updatedAt, user );
 

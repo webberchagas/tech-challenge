@@ -1,50 +1,35 @@
 package com.fiap.tech_challenge.controller.exception;
 
 import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
-import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
+import com.fiap.tech_challenge.controller.exception.factory.ExceptionDetailsFactory;
 import com.fiap.tech_challenge.exceptions.NotFoundException;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.sql.SQLIntegrityConstraintViolationException;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class ControllerExceptionHandler {
+public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({UserAlreadyRegisteredException.class, })
-    @ResponseStatus(value = BAD_REQUEST)
-    public ErrorResponseDto userAlreadyRegisteredHandleException(UserAlreadyRegisteredException e) {
-        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(value = BAD_REQUEST)
-    public ErrorResponseDto notReadableHandleException(HttpMessageNotReadableException e) {
-        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(value = BAD_REQUEST)
-    public ErrorResponseDto methodArgumentNotValidHandleException(MethodArgumentNotValidException e) {
-        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
+    @ExceptionHandler(UserAlreadyRegisteredException.class)
+    public ErrorResponseDto handleAlreadyRegistered(UserAlreadyRegisteredException e, WebRequest request) {
+        return ExceptionDetailsFactory.createProblem(e.getClass().toString(), HttpStatus.BAD_REQUEST, e.getMessage(), request);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(value = NOT_FOUND)
-    public ErrorResponseDto userNotFoundHandleException(NotFoundException e) {
-        return new ErrorResponseDto(e.getMessage(), NOT_FOUND.name());
+    public ErrorResponseDto handleNotFound(RuntimeException e, WebRequest request) {
+        return ExceptionDetailsFactory.createProblem(e.getClass().toString(), HttpStatus.NOT_FOUND, e.getMessage(), request);
     }
 
-    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    @ResponseStatus(value = BAD_REQUEST)
-    public ErrorResponseDto constraintViolationHandleException(SQLIntegrityConstraintViolationException e) {
-        return new ErrorResponseDto(e.getMessage(), BAD_REQUEST.name());
+    @ExceptionHandler(Exception.class)
+    public ErrorResponseDto handleGenericException(Exception e, WebRequest request) {
+        return ExceptionDetailsFactory.createProblem(
+                e.getClass().toString(),
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "An unexpected error occurred.",
+                request
+        );
     }
-
 }

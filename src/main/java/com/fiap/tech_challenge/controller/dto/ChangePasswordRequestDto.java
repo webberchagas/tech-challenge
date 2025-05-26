@@ -20,10 +20,10 @@ public class ChangePasswordRequestDto {
     @NotEmpty
     @Size(min = 8, max = 15, message = "Password must be at least 8 characters and maximum 15 characters")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "The password will be used for login. It must have at least 8 characters and a maximum of 15", example = "A123456*")
-    private String password;
+    private String newPassword;
 
     @NotEmpty
     @Size(min = 8, max = 15, message = "Password must be at least 8 characters and maximum 15 characters")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "The password will be used for login. It must have at least 8 characters and a maximum of 15", example = "A123456*")
-    private String newPassword;
+    private String confirmNewPassword;
 }

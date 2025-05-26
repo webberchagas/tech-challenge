@@ -28,25 +28,30 @@ public class LoginService {
 
     public void createPassword(LoginDomain loginDomain) {
         validateLoginInput(loginDomain);
-        var userEntity = getUserEntityByEmail(loginDomain.getEmail());
-        validateOldPassword(loginDomain, userEntity);
+        boolean token = true;
+        if (token) {
+            var userEntity = getUserEntityByEmail(loginDomain.getEmail()); // valida se o usuário está cadastrado no banco
+            validatePassword(loginDomain);
 
-        userEntity.createNewPassword(loginDomain.getNewPassword());
-        userRepository.save(userEntity);
-
+            userEntity.createNewPassword(loginDomain.getConfirmNewPassword());
+            userRepository.save(userEntity);
+        } else {
+            log.error("User without authentication to update password");
+            throw new NotFoundException("User without authentication to update password, please authenticate login");
+        }
     }
 
     private void validateLoginInput(LoginDomain loginDomain) {
-        if (loginDomain.getEmail() == null || loginDomain.getPassword() == null || loginDomain.getNewPassword() == null) {
+        if (loginDomain.getEmail() == null || loginDomain.getPassword() == null || loginDomain.getConfirmNewPassword() == null) {
             log.error("Email or passwords are null");
             throw new NotFoundException("Email and passwords cannot be null");
         }
     }
 
     private void validateOldPassword(LoginDomain loginDomain, UserEntity userEntity) {
-        if (!userEntity.getPassword().equals(loginDomain.getPassword())) {
-            log.error("Incorrect password for user with email: {}", loginDomain.getEmail());
-            throw new NotFoundException("Password is incorrect");
+        if (!userEntity.getPassword().equals(loginDomain.getConfirmNewPassword())) {
+            log.error("The passwords are different");
+            throw new NotFoundException("The passwords are different");
         }
     }
 

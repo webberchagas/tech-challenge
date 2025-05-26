@@ -16,7 +16,7 @@ public class CreateUserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public void createUser(UserDomain user) {
+    public UserResponseDto createUser(UserDomain user) {
         log.info("Creating user: {}", user.getEmail());
         validateUserDocumentNumber(user);
         validateUserEmail(user);
@@ -27,7 +27,7 @@ public class CreateUserService {
 
         var userEntity = userMapper.toEntity(user);
         userEntity.setUserIdInAddress();
-        userRepository.save(userEntity);
+        return userMapper.toResponseDto(userRepository.save(userEntity));
     }
 
     private void validateUserDocumentNumber(UserDomain user) {

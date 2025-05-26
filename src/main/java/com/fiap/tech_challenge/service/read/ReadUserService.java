@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -27,24 +28,12 @@ public class ReadUserService {
         return userMapper.toResponseDto(user);
     }
 
-    public UserResponseDto getUserByEmail(String email) {
-        log.info("Consulting user by e-mail: {}", email);
-        var user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new NotFoundException("User not found with e-mail: " + email));
-
-        return userMapper.toResponseDto(user);
-    }
-
-    public List<UserResponseDto> getUserByUserType(UserType userType) {
-        log.info("Consulting user by user type: {}", userType);
-        var users = userRepository.findByUserType(userType);
-
-        if (users.isEmpty()) {
-            throw new NotFoundException("No users found with user type: " + userType);
-        }
+    public List<UserResponseDto> getAllUsers() {
+        log.info("Consulting all users: ");
+        List<UserEntity> users = userRepository.findAll();
 
         return users.stream()
-                .map(userMapper::toResponseDto)
-                .toList();
+                .map(user -> userMapper.toResponseDto(user))
+                .collect(Collectors.toList());
     }
 }

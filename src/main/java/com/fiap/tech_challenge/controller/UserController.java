@@ -47,9 +47,9 @@ public class UserController implements UserAPI {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public void createUser(@RequestBody @Valid UserCreationRequestDto request) {
+    public UserResponseDto createUser(@RequestBody @Valid UserCreationRequestDto request) {
         var userDate = userMapper.toDomain(request);
-        createUserService.createUser(userDate);
+        return createUserService.createUser(userDate);
     }
 
     @GetMapping("/{id}")
@@ -67,9 +67,9 @@ public class UserController implements UserAPI {
         return readUserService.getUserById(id);
     }
 
-    @GetMapping("/email")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get User by e-mail", description = "Retrieve user information by user e-mail")
+    @Operation(summary = "Get all users ", description = "Retrieve all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User not found",
@@ -78,23 +78,8 @@ public class UserController implements UserAPI {
                     content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
     })
     @Override
-    public UserResponseDto getUserByEmail(@RequestParam("e-mail") String email) {
-        return readUserService.getUserByEmail(email);
-    }
-
-    @GetMapping("/userType")
-    @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get all users for user type", description = "Retrieve all users for user type")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
-    })
-    @Override
-    public List<UserResponseDto> getUserByUserType(@RequestParam("user_type") @Parameter(name = "user_type", description = "User type") final UserType userType) {
-        return readUserService.getUserByUserType(userType);
+    public List<UserResponseDto> getAllUsers() {
+        return readUserService.getAllUsers();
     }
 
     @DeleteMapping("/{id}")

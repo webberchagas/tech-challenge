@@ -12,13 +12,28 @@ services:
       - mysql_data:/var/lib/mysql
       - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
     networks:
-      - teste-net
+      - app-network
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 20s
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    environment:
+      PMA_HOST: mysql-container
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 0
+    restart: always
+    ports:
+      - "8081:80"
+    networks:
+      - app-network
+    depends_on:
+      - mysql
 
   app:
     build: .
@@ -30,7 +45,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - teste-net
+      - app-network
     depends_on:
       - mysql
 
@@ -38,5 +53,5 @@ volumes:
   mysql_data:
 
 networks:
-  teste-net:
+  app-network:
     driver: bridge

@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge.service.create;
 
+import com.fiap.tech_challenge.controller.dto.UserResponseDto;
 import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
 import com.fiap.tech_challenge.mapper.UserMapper;
 import com.fiap.tech_challenge.repository.UserRepository;

@@ -48,8 +48,8 @@ public class LoginService {
         }
     }
 
-    private void validateOldPassword(LoginDomain loginDomain, UserEntity userEntity) {
-        if (!userEntity.getPassword().equals(loginDomain.getConfirmNewPassword())) {
+    private void validatePassword(LoginDomain loginDomain) {
+        if (!loginDomain.getPassword().equals(loginDomain.getConfirmNewPassword())) {
             log.error("The passwords are different");
             throw new NotFoundException("The passwords are different");
         }

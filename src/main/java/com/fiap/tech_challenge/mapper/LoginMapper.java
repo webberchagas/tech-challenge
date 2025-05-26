@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface LoginMapper {
 
+    @Mapping(target = "confirmNewPassword", ignore = true)
     LoginDomain toDomainLogin(LoginRequestDto loginRequestDto);
 
     @Mapping(target = "password",source = "newPassword")

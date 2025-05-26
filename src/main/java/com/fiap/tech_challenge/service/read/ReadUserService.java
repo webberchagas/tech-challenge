@@ -4,6 +4,7 @@ import com.fiap.tech_challenge.controller.dto.UserResponseDto;
 import com.fiap.tech_challenge.controller.type.UserType;
 import com.fiap.tech_challenge.exceptions.NotFoundException;
 import com.fiap.tech_challenge.mapper.UserMapper;
+import com.fiap.tech_challenge.model.UserEntity;
 import com.fiap.tech_challenge.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

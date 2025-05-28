@@ -28,7 +28,7 @@ public interface UserAPI {
     })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void createUser(@RequestBody @Valid UserCreationRequestDto request);
+    UserResponseDto createUser(@RequestBody @Valid UserCreationRequestDto request);
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -42,9 +42,9 @@ public interface UserAPI {
     })
     UserResponseDto getUserById(@PathVariable String id);
 
-    @GetMapping("/email")
+    @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get User by e-mail", description = "Retrieve user information by user e-mail")
+    @Operation(summary = "Get all users ", description = "Retrieve all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User not found",
@@ -52,19 +52,7 @@ public interface UserAPI {
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
     })
-    UserResponseDto getUserByEmail(@RequestParam("e-mail") String email);
-
-    @GetMapping("/userType")
-    @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get all users for user type", description = "Retrieve all users for user type")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
-    })
-    List<UserResponseDto> getUserByUserType(@RequestParam("user_type") @Parameter(name = "user_type", description = "User type") UserType userType);
+    List<UserResponseDto> getAllUsers();
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

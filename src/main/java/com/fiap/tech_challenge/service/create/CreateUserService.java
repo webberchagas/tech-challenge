@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge.service.create;
 
+import com.fiap.tech_challenge.controller.dto.UserResponseDto;
 import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
 import com.fiap.tech_challenge.mapper.UserMapper;
 import com.fiap.tech_challenge.repository.UserRepository;
@@ -16,7 +17,7 @@ public class CreateUserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public void createUser(UserDomain user) {
+    public UserResponseDto createUser(UserDomain user) {
         log.info("Creating user: {}", user.getEmail());
         validateUserDocumentNumber(user);
         validateUserEmail(user);
@@ -27,7 +28,7 @@ public class CreateUserService {
 
         var userEntity = userMapper.toEntity(user);
         userEntity.setUserIdInAddress();
-        userRepository.save(userEntity);
+        return userMapper.toResponseDto(userRepository.save(userEntity));
     }
 
     private void validateUserDocumentNumber(UserDomain user) {

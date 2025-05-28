@@ -8,6 +8,6 @@ import lombok.Getter;
 public class LoginDomain {
     private String email;
     private String password;
-    private String newPassword;
+    private String confirmNewPassword;
 
 }

@@ -1,0 +1,2188 @@
+{
+	"info": {
+		"_postman_id": "8abe60fb-a488-41bb-8005-8e0a49a1991c",
+		"name": "Tech Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15803239",
+		"_collection_link": "https://warped-zodiac-614581.postman.co/workspace/TechChallenge~1f61cc99-99aa-4dfc-8216-5d8914c28d96/collection/15803239-8abe60fb-a488-41bb-8005-8e0a49a1991c?action=share&source=collection_link&creator=15803239"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Adicionar usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Adicionar usuário com endereço e como RESTAURANT_OWNER",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Adicionar usuário com endereço e como CLIENT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe 2\",\r\n    \"documentNumber\": \"11111111112\",\r\n    \"email\": \"john.doe2@gmail.com\",\r\n    \"phone\": \"12999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"CLIENT\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Adicionar usuário sem endereço e como RESTAURANT_OWNER",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe 3\",\r\n    \"documentNumber\": \"11111111113\",\r\n    \"email\": \"john.doe3@gmail.com\",\r\n    \"phone\": \"13999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Adicionar usuário sem endereço e como CLIENT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe 4\",\r\n    \"documentNumber\": \"11111111114\",\r\n    \"email\": \"john.doe4@gmail.com\",\r\n    \"phone\": \"14999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"CLIENT\",\r\n    \"address\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar adicionar usuário duplicado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Tentar adicionar usuário sem phone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Tentar adicionar usuário sem userType",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "8. Tentar adicionar usuário sem enviar e-mail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "9. Tentar adicionar usuário sem enviar senha",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "10. Tentar adicionar usuário com senha menor que 8 dígitos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar todos os usuários",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar usuário por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"05e71b88-8d37-4e7f-a055-f3af8d249939"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar usuário por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Buscar usuário por ID com ID inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Atualizar usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"documentNumber\": \"11111111111\",\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"phone\": \"11999999999\",\r\n    \"password\": \"123456789\",\r\n    \"userType\": \"RESTAURANT_OWNER\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"Rua Guanabara\",\r\n            \"number\": \"100\",\r\n            \"complement\": \"\",\r\n            \"neighborhood\": \"Nossa Senhora das Graças\",\r\n            \"city\": \"Porto Velho\",\r\n            \"state\": \"RO\",\r\n            \"country\": \"Brasil\",\r\n            \"postalCode\": \"76804132\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"05e71b88-8d37-4e7f-a055-f3af8d249939"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Atualizar usuário sem alterar as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva\",\r\n  \"documentNumber\": \"12345678901\",\r\n  \"email\": \"clebersilva@email.com\",\r\n  \"phone\": \"11999999999\",\r\n  \"userType\": \"CLIENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Atualizar usuário alterando todas as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"documentNumber\": \"98765432110\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"phone\": \"99111111111\",\r\n  \"userType\": \"RESTAURANT_OWNER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar atualizar usuário removendo o documento",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"phone\": \"99111111111\",\r\n  \"userType\": \"RESTAURANT_OWNER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar atualizar usuário removendo seu nome",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"documentNumber\": \"98765432110\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"phone\": \"99111111111\",\r\n  \"userType\": \"RESTAURANT_OWNER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar atualizar usuário removendo seu e-mail",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"documentNumber\": \"98765432110\",\r\n  \"phone\": \"99111111111\",\r\n  \"userType\": \"RESTAURANT_OWNER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Tentar atualizar o usuário removendo seu telefone",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"documentNumber\": \"98765432110\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"userType\": \"RESTAURANT_OWNER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Tentar atualizar o usuário removendo seu userType",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"documentNumber\": \"98765432110\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"phone\": \"99111111111\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "8. Tentar atualizar o usuário sem enviar o usuário",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"05e71b88-8d37-4e7f-a055-f3af8d249939"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Remover usuário passando ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Remover usuário com ID inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Endereços",
+			"item": [
+				{
+					"name": "Adicionar endereço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Adicionar endereço com complemento",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Adicionar endereço sem complemento",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar adicionar endereço sem número",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar adicionar endereço sem rua",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar adicionar endereço sem bairro",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Tentar adicionar endereço sem cidade",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Tentar adicionar endereço sem estado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "8. Tentar adicionar endereço sem país",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "9. Tentar adicionar endereço sem cep",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "10. Tentar adicionar endereço sem enviar endereço",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar endereços de um usuário",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362/userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"9116788f-cf9d-40e2-a06d-6f2a831ec362",
+								"userId"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar endereços de um usuário",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d-40e2-a06d-6f2a831ec362/userId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d-40e2-a06d-6f2a831ec362",
+										"userId"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Buscar endereços de um usuário com ID inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/9116788f-cf9d/userId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"9116788f-cf9d",
+										"userId"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar endereço pelo ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar endereço pelo ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Buscar endereço pelo ID com ID inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"4a25c2fd-a05a"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar endereço",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Atualizar endereço sem alterar as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"street\": \"Rua XV de Novembro\",\r\n    \"number\": \"5678\",\r\n    \"complement\": \"Sala 501\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"Santos\",\r\n    \"state\": \"SP\",\r\n    \"country\": \"Brasil\",\r\n    \"postalCode\": \"01015000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Atualizar endereço alterando todas as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Atualizar endereço sem enviar complemento",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar atualizar endereço sem enviar a rua",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar atualizar endereço sem enviar o número",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Tentar atualizar endereço sem enviar o bairro",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Tentar atualizar endereço sem enviar a cidade",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "8. Tentar atualizar endereço sem enviar o estado",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"country\": \"Brasil\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "9. Tentar atualizar endereço sem enviar o país",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"postalCode\": \"01311000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "10. Tentar atualizar endereço sem enviar o cep",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"street\": \"Avenida Paulista\",\r\n  \"number\": \"2030\",\r\n  \"complement\": \"Apt 101\",\r\n  \"neighborhood\": \"Jardins\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"country\": \"Brasil\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover endereço",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Remover usuário passando ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Remover endereço passando ID inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"4a25c2fd-a05a"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Logins",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"marias@email.com\",\r\n    \"password\": \"B123456*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/logins",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logins"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Login válido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"marias@email.com\",\r\n    \"password\": \"B123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar login sem e-mail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"B123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar login sem senha",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"marias@email.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar login com e-mail inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"mars@email.com\",\r\n    \"password\": \"B123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar login com senha inválida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"marias@email.com\",\r\n    \"password\": \"b123*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Tentar login sem enviar as credenciais",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Tentar login com e-mail e senha inválidos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"mars@email.com\",\r\n    \"password\": \"b123*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar senha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logins",
+								"changePassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Alterar senha",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"marias@email.com\",\r\n  \"newPassword\": \"A123456*\",\r\n  \"confirmNewPassword\": \"A123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Alterar senha com a mesma senha já cadastrada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"marias@email.com\",\r\n  \"newPassword\": \"A123456*\",\r\n  \"confirmNewPassword\": \"A123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar alterar senha com e-mail inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"mars@email.com\",\r\n  \"newPassword\": \"A123456*\",\r\n  \"confirmNewPassword\": \"A123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar alterar senha com a nova senha e a confirmação divergentes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"marias@email.com\",\r\n  \"newPassword\": \"A123456*\",\r\n  \"confirmNewPassword\": \"b123456*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar alterar senha sem enviar o formulário",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/logins/changePassword",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"logins",
+										"changePassword"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

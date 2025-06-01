@@ -10,10 +10,9 @@ import com.fiap.tech_challenge.service.user.DeleteUserService;
 import com.fiap.tech_challenge.service.user.ReadUserService;
 import com.fiap.tech_challenge.service.user.UpdateUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -39,8 +38,8 @@ public class UserControllerImpl implements UserController {
 
 
     @Override
-    public List<UserResponseDto> getAllUsers() {
-        return readUserService.getAllUsers();
+    public Page<UserResponseDto> getAllUsers(final Integer page, final Integer size, final String sort) {
+        return readUserService.getAllUsers(page, size, sort);
     }
 
     @Override

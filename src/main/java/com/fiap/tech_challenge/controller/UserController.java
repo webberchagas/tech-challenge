@@ -5,16 +5,18 @@ import com.fiap.tech_challenge.controller.dto.UserCreationRequestDto;
 import com.fiap.tech_challenge.controller.dto.UserResponseDto;
 import com.fiap.tech_challenge.controller.dto.UserUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Tag(name = "User Management", description = "API for creating, updating, deleting and retrieving users")
 public interface UserController {
@@ -52,7 +54,13 @@ public interface UserController {
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    List<UserResponseDto> getAllUsers();
+    Page<UserResponseDto> getAllUsers( @Parameter(description = "Page number") @RequestParam(defaultValue = "0") @Min(0) Integer page,
+                                       @Parameter(description = "Page size") @RequestParam(defaultValue = "10") @Min(1) Integer size,
+                                       @Parameter(description = "Sort criteria, example: name,asc or email,desc")
+                                       @RequestParam(defaultValue = "name,asc") String sort
+    );
+
+
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

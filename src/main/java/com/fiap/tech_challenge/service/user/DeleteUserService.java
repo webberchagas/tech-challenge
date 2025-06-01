@@ -1,6 +1,6 @@
-package com.fiap.tech_challenge.service.delete;
+package com.fiap.tech_challenge.service.user;
 
-import com.fiap.tech_challenge.exceptions.NotFoundException;
+import com.fiap.tech_challenge.exception.NotFoundException;
 import com.fiap.tech_challenge.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

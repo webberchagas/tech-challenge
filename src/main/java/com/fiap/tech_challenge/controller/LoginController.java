@@ -3,8 +3,6 @@ package com.fiap.tech_challenge.controller;
 import com.fiap.tech_challenge.controller.dto.ChangePasswordRequestDto;
 import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
 import com.fiap.tech_challenge.controller.dto.LoginRequestDto;
-import com.fiap.tech_challenge.mapper.LoginMapper;
-import com.fiap.tech_challenge.service.login.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,48 +10,35 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@RestController
-@RequestMapping("/api/v1/logins")
-@RequiredArgsConstructor
-@Tag(name = "Login Management", description = "Login validate and password change API")
-public class LoginController {
-
-    private final LoginMapper loginMapper;
-    private final LoginService loginService;
-
-    @Operation(summary = "Validate Login", description = "Validate e-mail and password")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Validate login successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
-    })
+@Tag(name = "Login Management", description = "API for user login validation and password management")
+public interface LoginController {
     @PostMapping
-    public ResponseEntity<Boolean> validateLogin(@RequestBody @Valid LoginRequestDto request) {
-        Boolean isValid = loginService.validateLogin(loginMapper.toDomainLogin(request));
-        if (!isValid){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(isValid);
-        }
-        return  ResponseEntity.ok(isValid);
-    }
-
-    @Operation(summary = "Change password", description = "Create a new password")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Validate user credentials", description = "Validates if the provided email and password are correct")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created new password successfully"),
+            @ApiResponse(responseCode = "200", description = "Login validated successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input data",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
+    Boolean validateLogin(@RequestBody @Valid LoginRequestDto request);
+
     @PostMapping("/changePassword")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createPassword(@RequestBody @Valid ChangePasswordRequestDto request) {
-        loginService.createPassword(loginMapper.toDomainPassword(request));
-    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Change user password", description = "Changes the user's password with a new one")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Password changed successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input data",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
+    void createPassword(@RequestBody @Valid ChangePasswordRequestDto request);
+
 }

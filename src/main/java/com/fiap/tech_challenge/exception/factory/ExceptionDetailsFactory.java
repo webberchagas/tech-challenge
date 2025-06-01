@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.controller.exception.factory;
+package com.fiap.tech_challenge.exception.factory;
 
 import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.service.domain;
+package com.fiap.tech_challenge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

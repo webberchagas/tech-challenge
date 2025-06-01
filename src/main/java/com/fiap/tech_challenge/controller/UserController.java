@@ -4,113 +4,78 @@ import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
 import com.fiap.tech_challenge.controller.dto.UserCreationRequestDto;
 import com.fiap.tech_challenge.controller.dto.UserResponseDto;
 import com.fiap.tech_challenge.controller.dto.UserUpdateRequestDto;
-import com.fiap.tech_challenge.mapper.UserMapper;
-import com.fiap.tech_challenge.controller.type.UserType;
-import com.fiap.tech_challenge.service.read.ReadUserService;
-import com.fiap.tech_challenge.service.create.CreateUserService;
-import com.fiap.tech_challenge.service.delete.DeleteUserService;
-import com.fiap.tech_challenge.service.update.UpdateUserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/users")
-@RequiredArgsConstructor
-@Tag(name = "User Management", description = "User creation, editing, deletion and search API")
-public class UserController implements UserAPI {
-
-    private final CreateUserService createUserService;
-    private final ReadUserService readUserService;
-    private final UpdateUserService updateUserService;
-    private final DeleteUserService deleteUserService;
-    private final UserMapper userMapper;
-
-    @Operation(summary = "Create User", description = "Create a new user in the system")
+@Tag(name = "User Management", description = "API for creating, updating, deleting and retrieving users")
+public interface UserController {
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create user", description = "Creates a new user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input data",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @Override
-    public UserResponseDto createUser(@RequestBody @Valid UserCreationRequestDto request) {
-        var userDate = userMapper.toDomain(request);
-        return createUserService.createUser(userDate);
-    }
+    UserResponseDto createUser(@RequestBody @Valid UserCreationRequestDto request);
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get User by ID", description = "Retrieve user information by user ID")
+    @Operation(summary = "Retrieve user by ID", description = "Retrieves user information using their unique ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    @Override
-    public UserResponseDto getUserById(@PathVariable String id) {
-        return readUserService.getUserById(id);
-    }
+    UserResponseDto getUserById(@PathVariable String id);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get all users ", description = "Retrieve all users")
+    @Operation(summary = "Retrieve all users", description = "Retrieves a list of all users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Users retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "No users found",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    @Override
-    public List<UserResponseDto> getAllUsers() {
-        return readUserService.getAllUsers();
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Delete User by ID", description = "Delete a user by their unique identifier")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "User deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
-    })
-    @Override
-    public void deleteUserById(@PathVariable String id) {
-        deleteUserService.deleteUserById(id);
-    }
+    List<UserResponseDto> getAllUsers();
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Update User by ID", description = "Update a user by ID")
+    @Operation(summary = "Update user by ID", description = "Updates user information using their ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User update successfully"),
+            @ApiResponse(responseCode = "200", description = "User updated successfully"),
             @ApiResponse(responseCode = "404", description = "User not found",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))}),
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = {@Content(schema = @Schema(implementation = ErrorResponseDto.class))})
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    @Override
-    public void updateUserById(@PathVariable String id, @RequestBody @Valid UserUpdateRequestDto request) {
-        var userDomain = userMapper.toDomainUpdate(request);
-        updateUserService.updateUserById(id, userDomain);
-    }
+    UserResponseDto updateUserById(@PathVariable String id, @RequestBody @Valid UserUpdateRequestDto request);
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete user by ID", description = "Deletes a user using their unique identifier")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "User deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
+    void deleteUserById(@PathVariable String id);
 
 }

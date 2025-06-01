@@ -9,37 +9,38 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "Request body for creating or updating an address")
 public class AddressRequestDto {
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the street or avenue", example = "Avenida Paulista")
+    @Schema(description = "Name of the street or avenue", example = "Avenida Paulista")
     private String street;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Number of the address", example = "2030")
+    @Schema(description = "Address number", example = "2030")
     private String number;
 
-    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Complement of the address", example = "Apt 101")
+    @Schema(description = "Additional address details (e.g. apartment, suite)", example = "Apt 101")
     private String complement;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the neighborhood", example = "Jardins")
+    @Schema(description = "Neighborhood", example = "Jardins")
     private String neighborhood;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "City of the user", example = "São Paulo")
+    @Schema(description = "City", example = "São Paulo")
     private String city;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "State of the user", example = "SP")
+    @Schema(description = "State abbreviation", example = "SP")
     private String state;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Country of the user", example = "Brasil")
+    @Schema(description = "Country", example = "Brasil")
     private String country;
 
     @NotEmpty
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Postal code of the user", example = "01311000")
+    @Schema(description = "Postal code (CEP)", example = "01311000")
     private String postalCode;
 
 }

@@ -1,10 +1,10 @@
-package com.fiap.tech_challenge.service.read;
+package com.fiap.tech_challenge.service.address;
 
-import com.fiap.tech_challenge.exceptions.NotFoundException;
+import com.fiap.tech_challenge.exception.NotFoundException;
 import com.fiap.tech_challenge.mapper.AddressMapper;
 import com.fiap.tech_challenge.repository.AddressRepository;
 import com.fiap.tech_challenge.repository.UserRepository;
-import com.fiap.tech_challenge.service.domain.AddressDomain;
+import com.fiap.tech_challenge.domain.AddressDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

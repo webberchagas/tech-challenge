@@ -1,9 +1,10 @@
 package com.fiap.tech_challenge.service.login;
 
-import com.fiap.tech_challenge.exceptions.NotFoundException;
-import com.fiap.tech_challenge.model.UserEntity;
+import com.fiap.tech_challenge.domain.LoginDomain;
+import com.fiap.tech_challenge.entity.UserEntity;
+import com.fiap.tech_challenge.exception.LoginFailedException;
+import com.fiap.tech_challenge.exception.NotFoundException;
 import com.fiap.tech_challenge.repository.UserRepository;
-import com.fiap.tech_challenge.service.domain.LoginDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,35 +17,32 @@ public class LoginService {
     private final UserRepository userRepository;
 
     public Boolean validateLogin(LoginDomain loginDomain) {
-        if (loginDomain.getEmail() == null || loginDomain.getPassword() == null) {
-            log.error("Email or password is null");
-            throw new NotFoundException("E-mail or password is null");
-        }
-        var userEntity = userRepository.findByEmail(loginDomain.getEmail());
-        return userEntity
-                .map(loginEntity -> loginEntity.getPassword().equals(loginDomain.getPassword()))
-                .orElse(false);
+        validateLoginInput(loginDomain);
+        var userEntity = getUserEntityByEmail(loginDomain.getEmail());
+        return isValidLogin(userEntity, loginDomain);
     }
 
     public void createPassword(LoginDomain loginDomain) {
-        validateLoginInput(loginDomain);
-        boolean token = true;
-        if (token) {
-            var userEntity = getUserEntityByEmail(loginDomain.getEmail()); // valida se o usuário está cadastrado no banco
-            validatePassword(loginDomain);
+        validateChangePasswordInput(loginDomain);
+        validatePassword(loginDomain);
+        var userEntity = getUserEntityByEmail(loginDomain.getEmail());
 
-            userEntity.createNewPassword(loginDomain.getConfirmNewPassword());
-            userRepository.save(userEntity);
-        } else {
-            log.error("User without authentication to update password");
-            throw new NotFoundException("User without authentication to update password, please authenticate login");
-        }
+        userEntity.createNewPassword(loginDomain.getConfirmNewPassword());
+        userRepository.save(userEntity);
+
     }
 
     private void validateLoginInput(LoginDomain loginDomain) {
+        if (loginDomain.getEmail() == null || loginDomain.getPassword() == null) {
+            log.error("Login input validation failed - email or password is null");
+            throw new NotFoundException("Email and password cannot be null");
+        }
+    }
+
+    private void validateChangePasswordInput(LoginDomain loginDomain) {
         if (loginDomain.getEmail() == null || loginDomain.getPassword() == null || loginDomain.getConfirmNewPassword() == null) {
-            log.error("Email or passwords are null");
-            throw new NotFoundException("Email and passwords cannot be null");
+            log.error("Change password validation failed - email, password and confirmation password cannot be null");
+            throw new NotFoundException("Email, password and confirmation password cannot be null");
         }
     }
 
@@ -61,6 +59,13 @@ public class LoginService {
                     log.error("User not found with email: {}", email);
                     return new NotFoundException("User not found with email: " + email);
                 });
+    }
+
+    private Boolean isValidLogin(UserEntity userEntity, LoginDomain loginDomain) {
+        if (userEntity.getPassword().equals(loginDomain.getPassword())) {
+            return true;
+        }
+        throw new LoginFailedException("Invalid email or password");
     }
 }
 

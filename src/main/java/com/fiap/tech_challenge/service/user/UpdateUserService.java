@@ -1,10 +1,11 @@
-package com.fiap.tech_challenge.service.update;
+package com.fiap.tech_challenge.service.user;
 
-import com.fiap.tech_challenge.exceptions.NotFoundException;
+import com.fiap.tech_challenge.controller.dto.UserResponseDto;
+import com.fiap.tech_challenge.exception.NotFoundException;
 import com.fiap.tech_challenge.mapper.UserMapper;
-import com.fiap.tech_challenge.model.UserEntity;
+import com.fiap.tech_challenge.entity.UserEntity;
 import com.fiap.tech_challenge.repository.UserRepository;
-import com.fiap.tech_challenge.service.domain.UserDomain;
+import com.fiap.tech_challenge.domain.UserDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class UpdateUserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
-    public void updateUserById(String id, UserDomain userDomain) {
+    public UserResponseDto updateUserById(String id, UserDomain userDomain) {
         var entityDataBase = findUserEntity(id);
 
         log.info("Updating user with ID: {}", entityDataBase.getUserId());
@@ -25,6 +26,7 @@ public class UpdateUserService {
         domainDataBase.updateUser(userDomain);
 
         userRepository.save(userMapper.toEntity(domainDataBase));
+        return userMapper.fromDomainToResponseDto(domainDataBase);
     }
 
 

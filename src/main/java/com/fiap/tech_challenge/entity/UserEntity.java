@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.model;
+package com.fiap.tech_challenge.entity;
 
 import com.fiap.tech_challenge.controller.type.UserType;
 import jakarta.persistence.*;

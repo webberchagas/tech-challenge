@@ -2,8 +2,8 @@ package com.fiap.tech_challenge.mapper;
 
 import com.fiap.tech_challenge.controller.dto.AddressRequestDto;
 import com.fiap.tech_challenge.controller.dto.AddressResponseDto;
-import com.fiap.tech_challenge.model.AddressEntity;
-import com.fiap.tech_challenge.service.domain.AddressDomain;
+import com.fiap.tech_challenge.entity.AddressEntity;
+import com.fiap.tech_challenge.domain.AddressDomain;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

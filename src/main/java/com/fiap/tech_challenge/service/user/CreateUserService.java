@@ -1,11 +1,11 @@
-package com.fiap.tech_challenge.service.create;
+package com.fiap.tech_challenge.service.user;
 
 import com.fiap.tech_challenge.controller.dto.UserResponseDto;
-import com.fiap.tech_challenge.exceptions.UserAlreadyRegisteredException;
+import com.fiap.tech_challenge.domain.AddressDomain;
+import com.fiap.tech_challenge.domain.UserDomain;
+import com.fiap.tech_challenge.exception.AlreadyRegisteredException;
 import com.fiap.tech_challenge.mapper.UserMapper;
 import com.fiap.tech_challenge.repository.UserRepository;
-import com.fiap.tech_challenge.service.domain.AddressDomain;
-import com.fiap.tech_challenge.service.domain.UserDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,14 +28,15 @@ public class CreateUserService {
 
         var userEntity = userMapper.toEntity(user);
         userEntity.setUserIdInAddress();
-        return userMapper.toResponseDto(userRepository.save(userEntity));
+        var entitySaved = userRepository.save(userEntity);
+        return userMapper.toResponseDto(entitySaved);
     }
 
     private void validateUserDocumentNumber(UserDomain user) {
         if (user.getDocumentNumber() != null) {
             userRepository.findByDocumentNumber(user.getDocumentNumber())
                     .ifPresent(u -> {
-                        throw new UserAlreadyRegisteredException("Document number already registered: " + user.getDocumentNumber());
+                        throw new AlreadyRegisteredException("Document number already registered: " + user.getDocumentNumber());
                     });
         }
     }
@@ -44,7 +45,7 @@ public class CreateUserService {
         if (user.getEmail() != null) {
             userRepository.findByEmail(user.getEmail())
                     .ifPresent(u -> {
-                        throw new UserAlreadyRegisteredException("Email already registered: " + user.getEmail());
+                        throw new AlreadyRegisteredException("Email already registered: " + user.getEmail());
                     });
         }
     }

@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.model;
+package com.fiap.tech_challenge.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

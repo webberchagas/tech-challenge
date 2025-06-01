@@ -1,10 +1,10 @@
-package com.fiap.tech_challenge.service.update;
+package com.fiap.tech_challenge.service.address;
 
-import com.fiap.tech_challenge.exceptions.NotFoundException;
+import com.fiap.tech_challenge.exception.NotFoundException;
 import com.fiap.tech_challenge.mapper.AddressMapper;
-import com.fiap.tech_challenge.model.AddressEntity;
+import com.fiap.tech_challenge.entity.AddressEntity;
 import com.fiap.tech_challenge.repository.AddressRepository;
-import com.fiap.tech_challenge.service.domain.AddressDomain;
+import com.fiap.tech_challenge.domain.AddressDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UpdateAddressService {
     private final AddressMapper addressMapper;
     private final AddressRepository addressRepository;
 
-    public void updateAddressById(String id, AddressDomain newAddressData) {
+    public AddressDomain updateAddressById(String id, AddressDomain newAddressData) {
         var addressDataBase = findAddressById(id);
         log.info("Updating address with ID: {}", addressDataBase.getAddressId());
 
@@ -28,6 +28,7 @@ public class UpdateAddressService {
         addressToUpdate.setUserInAddress(addressDataBase.getUser());
 
         addressRepository.save(addressToUpdate);
+        return addressMapper.toAddressDomain(addressToUpdate);
     }
 
     private AddressEntity findAddressById(String id) {

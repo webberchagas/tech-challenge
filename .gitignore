@@ -27,6 +27,7 @@ target/
 
 # IntelliJ IDEA
 .idea/
+.idea/*
 *.iws
 *.iml
 *.ipr
@@ -43,7 +44,6 @@ release.properties
 
 # Variáveis de ambiente e chaves
 .env
-.env.*
 *.key
 *.pem
 *.crt

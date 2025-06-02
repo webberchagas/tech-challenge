@@ -1,8 +1,5 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 # Compiled class file
 *.class
@@ -26,21 +23,18 @@ target/
 *.rar
 
 # IntelliJ IDEA
+<<<<<<< HEAD
 .idea/
 .idea/*
+=======
+.idea
+>>>>>>> c3e989e74ae932a3b02345c077667a98fe519381
 *.iws
 *.iml
 *.ipr
-out/
 
-# Maven
-.mvn/
-!/.mvn/wrapper/maven-wrapper.jar
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
+# VS Code
+.vscode/
 
 # Variáveis de ambiente e chaves
 .env
@@ -48,3 +42,6 @@ release.properties
 *.pem
 *.crt
 *.jks
+
+# Test reports
+surefire-reports/

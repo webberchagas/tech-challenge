@@ -1,6 +1,5 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
 
 # Compiled class file
 *.class
@@ -32,10 +31,6 @@ target/
 # VS Code
 .vscode/
 
-# Maven
-.mvn/
-release.properties
-
 # Variáveis de ambiente e chaves
 .env
 .env.*
@@ -47,10 +42,3 @@ release.properties
 
 # Test reports
 surefire-reports/
-
-# macOS
-.DS_Store
-
-# Linux
-*.swp
-*.swo

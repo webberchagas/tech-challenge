@@ -60,8 +60,6 @@ public interface UserController {
                                        @RequestParam(defaultValue = "name,asc") String sort
     );
 
-
-
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update user by ID", description = "Updates user information using their ID")

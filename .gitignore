@@ -23,12 +23,8 @@ target/
 *.rar
 
 # IntelliJ IDEA
-<<<<<<< HEAD
 .idea/
 .idea/*
-=======
-.idea
->>>>>>> c3e989e74ae932a3b02345c077667a98fe519381
 *.iws
 *.iml
 *.ipr
@@ -37,7 +33,6 @@ target/
 .vscode/
 
 # Variáveis de ambiente e chaves
-.env
 *.key
 *.pem
 *.crt

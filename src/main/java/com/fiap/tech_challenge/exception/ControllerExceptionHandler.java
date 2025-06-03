@@ -2,6 +2,7 @@ package com.fiap.tech_challenge.exception;
 
 import com.fiap.tech_challenge.controller.dto.ErrorResponseDto;
 import com.fiap.tech_challenge.exception.factory.ExceptionDetailsFactory;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,9 +17,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(AlreadyRegisteredException.class)
+    @ExceptionHandler({AlreadyRegisteredException.class, PropertyReferenceException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDto handleAlreadyRegistered(AlreadyRegisteredException e, WebRequest request) {
+    public ErrorResponseDto handleAlreadyRegistered(RuntimeException e, WebRequest request) {
         return ExceptionDetailsFactory.createProblem(e.getClass().toString(), HttpStatus.BAD_REQUEST, e.getMessage(), request);
     }
 

@@ -33,6 +33,8 @@ target/
 .vscode/
 
 # Variáveis de ambiente e chaves
+.env
+*.env
 *.key
 *.pem
 *.crt

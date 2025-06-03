@@ -52,8 +52,10 @@ src/main/java/com/fiap/tech_challenge
 ```
 
 ## 🧩 Variáveis de ambiente
-Parametrize o arquivo .env.example da seguinte forma:
+Renomei o arquivo “.env.example” para ".env" e preencha-o da seguinte maneira:
 ```
+DB_URI=jdbc:mysql://mysql-container:3306/db-usermanagement?useSSL=false&serverTimezone=UTC&allowPublicK
+eyRetrieval=true
 DB_USER= usuario_do_banco
 DB_PASSWORD= senha_do_banco
 ```

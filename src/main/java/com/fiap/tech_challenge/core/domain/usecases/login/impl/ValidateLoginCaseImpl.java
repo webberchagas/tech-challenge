@@ -5,7 +5,7 @@ import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
-import com.fiap.tech_challenge.core.dto.LoginRequestDto;
+import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import com.fiap.tech_challenge.core.exception.LoginFailedException;
 
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
@@ -26,7 +26,7 @@ public class ValidateLoginCaseImpl implements ValidateLoginCase {
     public Boolean run(LoginRequestDto request){
         var loginDomain = loginMapper.toDomainLogin(request);
 
-        log.error("Login input validation failed - email or password is null");
+        log.info("Validating request data");
         loginDomain.validateLoginInput();
 
         var userDomain = loginGateway.getUserByEmail(loginDomain.getEmail());

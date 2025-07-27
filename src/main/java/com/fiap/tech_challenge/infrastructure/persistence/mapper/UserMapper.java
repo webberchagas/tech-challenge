@@ -1,9 +1,9 @@
 package com.fiap.tech_challenge.infrastructure.persistence.mapper;
 
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
-import com.fiap.tech_challenge.core.dto.UserCreationRequestDto;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
-import com.fiap.tech_challenge.core.dto.UserUpdateRequestDto;
+import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

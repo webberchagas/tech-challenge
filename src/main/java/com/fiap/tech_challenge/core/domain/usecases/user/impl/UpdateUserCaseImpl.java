@@ -3,7 +3,7 @@ package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.user.UpdateUserCase;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

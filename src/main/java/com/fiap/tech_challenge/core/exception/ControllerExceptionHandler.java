@@ -1,6 +1,6 @@
 package com.fiap.tech_challenge.core.exception;
 
-import com.fiap.tech_challenge.core.dto.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
 import com.fiap.tech_challenge.core.exception.factory.ExceptionDetailsFactory;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpHeaders;

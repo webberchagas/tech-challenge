@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.infrastructure.persistence.mapper;
 
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
-import com.fiap.tech_challenge.core.dto.AddressRequestDto;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
+import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,8 +16,8 @@ public interface AddressMapper {
     AddressEntity toAddressEntity(AddressDomain address);
     AddressResponseDto fromEntitytoResponse(AddressEntity entity);
     AddressResponseDto toAddressResponse(AddressDomain domain);
-    List<AddressResponseDto> toAddressResponseList(List<AddressDomain> domain);
-    List<AddressResponseDto> toAddressDomainList(List<AddressEntity> entity);
+//    List<AddressResponseDto> toAddressResponseList(List<AddressDomain> domain);
+//    List<AddressResponseDto> toAddressDomainList(List<AddressEntity> entity);
 
 
     @Mapping(target = "user", ignore = true)

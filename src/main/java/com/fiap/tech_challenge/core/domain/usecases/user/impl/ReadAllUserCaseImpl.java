@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
-import com.fiap.tech_challenge.core.domain.usecases.user.ReadUserCase;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
+import com.fiap.tech_challenge.core.domain.usecases.user.ReadAllUserCase;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,20 +10,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @Slf4j
-public class ReadUserCaseImpl implements ReadUserCase {
+public class ReadAllUserCaseImpl implements ReadAllUserCase {
     private final UserGateway userGateway;
 
-    public ReadUserCaseImpl(UserGateway userGateway) {
+    public ReadAllUserCaseImpl(UserGateway userGateway) {
         this.userGateway = userGateway;
     }
 
     @Override
-    public UserResponseDto getUserById(String id) {
-        return userGateway.getUserById(id);
-    }
-
-    @Override
-    public Page<UserResponseDto> getAllUsers(final Integer page, final Integer size, final String sort) {
+    public Page<UserResponseDto> run(final Integer page, final Integer size, final String sort) {
         log.info("Consulting all users");
         Pageable pageable = buildPageable(page, size, sort);
         return userGateway.getAllUsers(pageable);

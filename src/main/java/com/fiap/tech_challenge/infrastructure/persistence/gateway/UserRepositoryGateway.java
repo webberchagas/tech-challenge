@@ -2,7 +2,7 @@ package com.fiap.tech_challenge.infrastructure.persistence.gateway;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.exception.AlreadyRegisteredException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
@@ -40,7 +40,10 @@ public class UserRepositoryGateway implements UserGateway {
 
     @Override
     public UserResponseDto createUser(UserDomain user) {
-        var newRegister = userRepository.save(userMapper.toEntity(user));
+        var userEntity = userMapper.toEntity(user);
+        userEntity.setUserIdInAddress();
+
+        var newRegister = userRepository.save(userEntity);
         return userMapper.toResponseDto(newRegister);
     }
 

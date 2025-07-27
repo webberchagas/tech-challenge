@@ -2,12 +2,12 @@ package com.fiap.tech_challenge.infrastructure.application.impl;
 
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
-import com.fiap.tech_challenge.core.dto.ChangePasswordRequestDto;
-import com.fiap.tech_challenge.core.dto.LoginRequestDto;
 import com.fiap.tech_challenge.infrastructure.application.LoginController;
-import lombok.RequiredArgsConstructor;
+import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
+import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/logins")

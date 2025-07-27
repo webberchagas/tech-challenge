@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.core.dto;
+package com.fiap.tech_challenge.core.dto.login;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

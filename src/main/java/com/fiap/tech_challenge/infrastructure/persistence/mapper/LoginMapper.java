@@ -3,8 +3,8 @@ package com.fiap.tech_challenge.infrastructure.persistence.mapper;
 
 
 import com.fiap.tech_challenge.core.domain.model.LoginDomain;
-import com.fiap.tech_challenge.core.dto.ChangePasswordRequestDto;
-import com.fiap.tech_challenge.core.dto.LoginRequestDto;
+import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
+import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

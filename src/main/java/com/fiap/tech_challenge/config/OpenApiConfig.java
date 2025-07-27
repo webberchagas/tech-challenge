@@ -3,21 +3,12 @@ package com.fiap.tech_challenge.config;
 import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
-import com.fiap.tech_challenge.core.domain.usecases.address.impl.CreateAddressCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.address.impl.DeleteAddressCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.address.impl.ReadAddressCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.address.impl.UpdateAddressCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
-import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
-import com.fiap.tech_challenge.core.domain.usecases.login.impl.CreatePasswordCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.login.impl.ValidateLoginCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.user.CreateUserCase;
-import com.fiap.tech_challenge.core.domain.usecases.user.impl.CreateUserCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.user.impl.DeleteUserCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.user.impl.ReadUserCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.user.impl.UpdateUserCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.login.impl.*;
+import com.fiap.tech_challenge.core.domain.usecases.user.impl.*;
+import com.fiap.tech_challenge.core.domain.usecases.address.impl.*;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
+import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -57,8 +48,13 @@ public class OpenApiConfig {
         }
 
         @Bean
-        public ReadUserCaseImpl readUserCase(UserGateway userGateway){
-                return new ReadUserCaseImpl(userGateway);
+        public ReadAllUserCaseImpl readAllUserCase(UserGateway userGateway){
+                return new ReadAllUserCaseImpl(userGateway);
+        }
+
+        @Bean
+        public ReadUserByIdCaseImpl readUserByIdCase(UserGateway userGateway){
+                return new ReadUserByIdCaseImpl(userGateway);
         }
 
         @Bean
@@ -82,12 +78,12 @@ public class OpenApiConfig {
         }
 
         @Bean
-        public UpdateAddressCaseImpl updateAddressCase(AddressGateway addressGateway){
-                return new UpdateAddressCaseImpl(addressGateway);
+        public UpdateAddressCaseImpl updateAddressCase(AddressGateway addressGateway, AddressMapper addressMapper, UserMapper userMapper){
+                return new UpdateAddressCaseImpl(addressGateway,addressMapper,userMapper);
         }
 
-//        @Bean
-//        public ReadAddressCaseImpl readAddressCase(AddressGateway addressGateway, AddressMapper addressMapper){
-//                return new ReadAddressCaseImpl(addressGateway, addressMapper);
-//        }
+        @Bean
+        public ReadAddressCaseImpl readAddressCase(UserGateway userGateway, AddressMapper addressMapper){
+                return new ReadAddressCaseImpl(userGateway, addressMapper);
+        }
 }

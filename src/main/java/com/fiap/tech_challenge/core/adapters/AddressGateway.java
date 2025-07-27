@@ -1,9 +1,8 @@
 package com.fiap.tech_challenge.core.adapters;
 
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
 
 public interface AddressGateway {
 
@@ -11,7 +10,7 @@ public interface AddressGateway {
 
    void deleteAddressById(String addressId);
 
-    AddressDomain searchAddressById(String id);
+    AddressEntity searchAddressById(String id);
 
 
 

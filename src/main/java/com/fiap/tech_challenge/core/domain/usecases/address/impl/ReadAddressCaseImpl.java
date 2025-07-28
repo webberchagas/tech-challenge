@@ -1,18 +1,11 @@
 package com.fiap.tech_challenge.core.domain.usecases.address.impl;
 
-import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
-import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.usecases.address.ReadAddressCase;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
-import java.util.List;
+
 
 @Slf4j
 public class ReadAddressCaseImpl implements ReadAddressCase {

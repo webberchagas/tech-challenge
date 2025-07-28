@@ -1,20 +1,13 @@
 package com.fiap.tech_challenge.infrastructure.application.impl;
 
-
-import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
-import com.fiap.tech_challenge.core.domain.usecases.address.DeleteAddressCase;
-import com.fiap.tech_challenge.core.domain.usecases.address.ReadAddressCase;
-import com.fiap.tech_challenge.core.domain.usecases.address.UpdateAddressCase;
-import com.fiap.tech_challenge.core.dto.AddressRequestDto;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
+import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.infrastructure.application.AddressController;
+import com.fiap.tech_challenge.core.domain.usecases.address.*;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/addresses")

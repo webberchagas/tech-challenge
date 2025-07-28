@@ -1,8 +1,9 @@
-package com.fiap.tech_challenge.core.dto;
+package com.fiap.tech_challenge.core.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

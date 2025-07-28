@@ -1,7 +1,7 @@
 package com.fiap.tech_challenge.core.adapters;
 
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

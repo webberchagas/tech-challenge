@@ -1,9 +1,9 @@
 package com.fiap.tech_challenge.infrastructure.application;
 
 
-import com.fiap.tech_challenge.core.dto.AddressRequestDto;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
-import com.fiap.tech_challenge.core.dto.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
+import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,8 +13,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Tag(name = "Address Management", description = "Address creation, editing, retrieval and deletion API")

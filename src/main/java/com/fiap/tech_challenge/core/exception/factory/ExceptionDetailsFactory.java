@@ -1,7 +1,7 @@
 package com.fiap.tech_challenge.core.exception.factory;
 
 
-import com.fiap.tech_challenge.core.dto.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.WebRequest;
 

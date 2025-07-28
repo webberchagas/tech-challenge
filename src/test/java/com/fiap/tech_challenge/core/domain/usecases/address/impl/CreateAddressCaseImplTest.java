@@ -6,7 +6,7 @@ import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

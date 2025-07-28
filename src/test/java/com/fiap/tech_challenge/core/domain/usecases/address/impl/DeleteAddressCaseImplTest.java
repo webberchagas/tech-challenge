@@ -2,6 +2,7 @@ package com.fiap.tech_challenge.core.domain.usecases.address.impl;
 
 import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.domain.usecases.address.DeleteAddressCase;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,11 @@ public class DeleteAddressCaseImplTest {
         deleteAddressCase = new DeleteAddressCaseImpl(addressGateway);
 
         addressIdTest = UUID.randomUUID().toString();
+    }
+
+    @AfterEach
+    void tearDown () throws Exception {
+        mock.close();
     }
 
     @DisplayName("Deve remover o endereço")

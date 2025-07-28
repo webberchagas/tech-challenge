@@ -4,7 +4,7 @@ import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
-import com.fiap.tech_challenge.core.dto.LoginRequestDto;
+import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import com.fiap.tech_challenge.core.exception.LoginFailedException;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;

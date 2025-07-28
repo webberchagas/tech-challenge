@@ -1,20 +1,21 @@
-package com.fiap.tech_challenge.core.dto;
+package com.fiap.tech_challenge.core.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Schema(description = "Request body for creating a new user")
-public class UserCreationRequestDto {
+@Schema(description = "Request body for updating user information")
+public class UserUpdateRequestDto {
 
     @NotEmpty
     @Schema(description = "User full name", example = "John Doe")
@@ -35,17 +36,9 @@ public class UserCreationRequestDto {
     @Schema(description = "User phone number", example = "11999999999")
     private String phone;
 
-    @NotEmpty
-    @Size(min = 8, max = 15, message = "Password must be at least 8 characters and maximum 15 characters")
-    @Schema(description = "User password (8 to 15 characters)", example = "A123456*")
-    private String password;
-
     @NotNull
     @Schema(description = "User type", example = "RESTAURANT_OWNER")
     private UserType userType;
 
-    @NotNull
-    @Schema(description = "List of addresses for the user")
-    private List<AddressRequestDto> address;
 }
 

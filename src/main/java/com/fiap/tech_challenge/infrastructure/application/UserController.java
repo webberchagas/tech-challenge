@@ -1,10 +1,10 @@
 package com.fiap.tech_challenge.infrastructure.application;
 
 
-import com.fiap.tech_challenge.core.dto.ErrorResponseDto;
-import com.fiap.tech_challenge.core.dto.UserCreationRequestDto;
-import com.fiap.tech_challenge.core.dto.UserResponseDto;
-import com.fiap.tech_challenge.core.dto.UserUpdateRequestDto;
+import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
+import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
+import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

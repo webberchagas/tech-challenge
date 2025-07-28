@@ -2,7 +2,7 @@ package com.fiap.tech_challenge.core.domain.usecases.login.impl;
 
 import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
-import com.fiap.tech_challenge.core.dto.ChangePasswordRequestDto;
+import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,10 +21,10 @@ public class CreatePasswordCaseImpl implements CreatePasswordCase {
     public void run(ChangePasswordRequestDto request) {
         var loginDomain = loginMapper.toDomainPassword(request);
 
-        log.error("Change password validation failed - email, password and confirmation password cannot be null");
+        log.info("Validating request data");
         loginDomain.validateChangePasswordInput();
 
-        log.error("The passwords are different");
+        log.info("Password Verification");
         loginDomain.validatePassword();
 
         var userEntity = loginGateway.getUserByEmail(loginDomain.getEmail());

@@ -4,7 +4,7 @@ import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
-import com.fiap.tech_challenge.core.dto.AddressResponseDto;
+import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,7 +23,7 @@ public class CreateAddressCaseImpl implements CreateAddressCase {
 
         log.info("Saving address for user: {}", id);
         addressDomain.createDateAddressSave();
-//        addressDomain.setUserInAddress(user);
+        addressDomain.setUserInAddress(user);
 
         return addressGateway.createAddress(addressDomain);
     }

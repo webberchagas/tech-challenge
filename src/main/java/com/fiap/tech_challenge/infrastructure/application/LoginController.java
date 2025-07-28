@@ -1,9 +1,9 @@
 package com.fiap.tech_challenge.infrastructure.application;
 
 
-import com.fiap.tech_challenge.core.dto.ChangePasswordRequestDto;
-import com.fiap.tech_challenge.core.dto.ErrorResponseDto;
-import com.fiap.tech_challenge.core.dto.LoginRequestDto;
+import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
+import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

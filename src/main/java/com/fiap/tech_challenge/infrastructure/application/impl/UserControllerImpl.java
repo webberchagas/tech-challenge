@@ -2,6 +2,7 @@ package com.fiap.tech_challenge.infrastructure.application.impl;
 
 
 import com.fiap.tech_challenge.core.domain.usecases.user.*;
+import com.fiap.tech_challenge.core.dto.user.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
@@ -9,7 +10,6 @@ import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import com.fiap.tech_challenge.infrastructure.application.UserController;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +37,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public Page<UserResponseDto> getAllUsers(final Integer page, final Integer size, final String sort) {
+    public PagedResponseDto<UserResponseDto> getAllUsers(final Integer page, final Integer size, final String sort) {
         return readAllUserCase.run(page, size, sort);
     }
 

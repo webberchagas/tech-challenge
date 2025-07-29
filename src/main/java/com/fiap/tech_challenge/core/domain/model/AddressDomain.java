@@ -1,6 +1,5 @@
 package com.fiap.tech_challenge.core.domain.model;
 
-import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

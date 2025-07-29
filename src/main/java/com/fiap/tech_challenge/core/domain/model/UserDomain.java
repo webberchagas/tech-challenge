@@ -40,40 +40,4 @@ public class UserDomain {
         this.password = newPassword;
     }
 
-
-//    private void validateName(String name){
-//        if(name == null || name.isEmpty()){
-//            throw new IllegalArgumentException("Name cannot be null or empty");
-//        }
-//    }
-//
-//    private void validateEmail(String email){
-//        if(email == null || email.isEmpty()){
-//            throw new IllegalArgumentException("Email cannot be null or empty");
-//        }
-//    }
-//
-//    private void validateDocumentNumber(String documentNumber){
-//        if(documentNumber == null || documentNumber.isEmpty()){
-//            throw new IllegalArgumentException("Document number cannot be null or empty");
-//        }
-//    }
-//
-//    private void validatePhone(String phone){
-//        if(phone == null || phone.isEmpty()){
-//            throw new IllegalArgumentException("Phone number cannot be null or empty");
-//        }
-//    }
-//
-//    private void validatePassword(String password){
-//        if(password == null || password.isEmpty()){
-//            throw new IllegalArgumentException("Password cannot be null or empty");
-//        }
-//    }
-//
-//    private void validateUserType(UserType userType){
-//        if(userType == null || userType == null){
-//            throw new IllegalArgumentException("UserType cannot be null or empty");
-//        }
-//    }
 }

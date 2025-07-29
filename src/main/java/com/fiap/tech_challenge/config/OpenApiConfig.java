@@ -83,7 +83,12 @@ public class OpenApiConfig {
         }
 
         @Bean
-        public ReadAddressCaseImpl readAddressCase(UserGateway userGateway, AddressMapper addressMapper){
-                return new ReadAddressCaseImpl(userGateway, addressMapper);
+        public ReadAddressByIdCaseImpl readAddressByUserIdCase(AddressGateway addressGateway){
+                return new ReadAddressByIdCaseImpl(addressGateway);
+        }
+
+        @Bean
+        public ReadAddressByUserIdCaseImpl readAddressByIdCase(UserGateway userGateway){
+                return new ReadAddressByUserIdCaseImpl(userGateway);
         }
 }

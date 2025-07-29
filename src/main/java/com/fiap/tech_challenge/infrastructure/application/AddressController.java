@@ -14,32 +14,34 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Tag(name = "Address Management", description = "Address creation, editing, retrieval and deletion API")
 public interface AddressController {
-//    @GetMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    @Operation(summary = "Retrieve address by ID", description = "Retrieves an address using its unique identifier")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Address retrieved successfully"),
-//            @ApiResponse(responseCode = "404", description = "Address not found",
-//                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
-//            @ApiResponse(responseCode = "500", description = "Internal server error",
-//                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
-//    })
-//    AddressResponseDto getAddressById(@PathVariable String id);
-//
-//    @GetMapping("/by-user/{userId}")
-//    @ResponseStatus(HttpStatus.OK)
-//    @Operation(summary = "Retrieve addresses by user ID", description = "Retrieves all addresses associated with a given user ID")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Addresses retrieved successfully"),
-//            @ApiResponse(responseCode = "404", description = "User not found or has no addresses",
-//                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
-//            @ApiResponse(responseCode = "500", description = "Internal server error",
-//                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
-//    })
-//    List<AddressResponseDto> getAddressByUserId(@PathVariable String userId);
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Retrieve address by ID", description = "Retrieves an address using its unique identifier")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Address retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Address not found",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
+    AddressResponseDto getAddressById(@PathVariable String id);
+
+    @GetMapping("/by-user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Retrieve addresses by user ID", description = "Retrieves all addresses associated with a given user ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Addresses retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found or has no addresses",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
+    List<AddressResponseDto> getAddressByUserId(@PathVariable String userId);
 
     @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.CREATED)

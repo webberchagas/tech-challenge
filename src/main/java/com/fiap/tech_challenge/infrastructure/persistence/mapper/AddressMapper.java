@@ -7,7 +7,7 @@ import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
+//import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AddressMapper {

@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/addresses")
 @RequiredArgsConstructor
@@ -17,20 +19,21 @@ public class AddressControllerImpl implements AddressController {
     private final CreateAddressCase createAddressCase;
     private final DeleteAddressCase deleteAddressCase;
     private final UpdateAddressCase updateAddressCase;
-//    private final ReadAddressCase readAddressCase;
+    private final ReadAddressByIdCase readAddressByIdCase;
+    private final ReadAddressByUserIdCase readAddressByUserIdCase;
     private final AddressMapper addressMapper;
 
-//    @Override
-//    public AddressResponseDto getAddressById(String id) {
-//        var address = readAddressCase.getUserById(id);
-//        return address;
-//    }
-//
-//    @Override
-//    public List<AddressResponseDto> getAddressByUserId(String userId) {
-//        var address = readAddressCase.readAddressByUserId(userId);
-//        return addressMapper.toAddressResponseList(address);
-//    }
+    @Override
+    public AddressResponseDto getAddressById(String id) {
+        var address = readAddressByIdCase.run(id);
+        return addressMapper.fromEntitytoResponse(address);
+    }
+
+    @Override
+    public List<AddressResponseDto> getAddressByUserId(String userId) {
+        var address = readAddressByUserIdCase.run(userId);
+        return address;
+    }
 
     @Override
     public AddressResponseDto createAddress(String userId, AddressRequestDto request) {

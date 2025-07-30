@@ -10,7 +10,7 @@ public interface AddressGateway {
 
    void deleteAddressById(String addressId);
 
-    AddressEntity searchAddressById(String id);
+    AddressEntity searchAddressById(String id);// talvez tenha que modificar porque esta devolvendo um entity que vem da camada do infrastructure
 
 
 

@@ -1,9 +1,8 @@
 package com.fiap.tech_challenge.core.adapters;
 
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
+import com.fiap.tech_challenge.core.dto.user.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 
 public interface UserGateway {
@@ -16,6 +15,6 @@ public interface UserGateway {
 
     UserDomain searchUserById(String id);
     UserResponseDto getUserById(String id);
-    Page<UserResponseDto> getAllUsers(Pageable pageable);
+    PagedResponseDto<UserResponseDto> getAllUsers(Integer page, Integer size, String sort);
 
 }

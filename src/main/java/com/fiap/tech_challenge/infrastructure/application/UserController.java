@@ -2,6 +2,7 @@ package com.fiap.tech_challenge.infrastructure.application;
 
 
 import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
+import com.fiap.tech_challenge.core.dto.user.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
@@ -15,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,9 +56,9 @@ public interface UserController {
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    Page<UserResponseDto> getAllUsers(@Parameter(description = "Page number") @RequestParam(defaultValue = "0") @Min(0) Integer page,
-                                      @Parameter(description = "Page size") @RequestParam(defaultValue = "10") @Min(1) Integer size,
-                                      @Parameter(description = "Sort criteria, example: name,asc or email,desc")
+    PagedResponseDto<UserResponseDto> getAllUsers(@Parameter(description = "Page number") @RequestParam(defaultValue = "0") @Min(0) Integer page,
+                                         @Parameter(description = "Page size") @RequestParam(defaultValue = "10") @Min(1) Integer size,
+                                         @Parameter(description = "Sort criteria, example: name,asc or email,desc")
                                        @RequestParam(defaultValue = "name,asc") String sort
     );
 

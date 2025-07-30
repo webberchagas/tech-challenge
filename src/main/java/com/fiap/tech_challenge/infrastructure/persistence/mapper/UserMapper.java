@@ -15,7 +15,7 @@ public interface UserMapper {
     UserDomain toDomainUpdate(UserUpdateRequestDto userDto);
     UserEntity toEntity(UserDomain userDomain);
     UserResponseDto toResponseDto(UserEntity userEntity);
-    UserResponseDto fromDomainToResponseDto(UserDomain userDomain);
+//    UserResponseDto fromDomainToResponseDto(UserDomain userDomain);
 
     @Mapping(target = "address", ignore = true)
     UserDomain fromEntityToDomain(UserEntity userEntity);

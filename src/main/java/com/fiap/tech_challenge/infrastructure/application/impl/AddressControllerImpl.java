@@ -32,21 +32,19 @@ public class AddressControllerImpl implements AddressController {
     @Override
     public List<AddressResponseDto> getAddressByUserId(String userId) {
         var address = readAddressByUserIdCase.run(userId);
-        return address;
+        return addressMapper.toAddressResponseList(address);
     }
 
     @Override
     public AddressResponseDto createAddress(String userId, AddressRequestDto request) {
         var addressDomain = addressMapper.fromRequestToAddressDomain(request);
-        var newAddress = createAddressCase.run(userId,addressDomain);
-        return newAddress;
+        return createAddressCase.run(userId,addressDomain);
     }
 
     @Override
     public AddressResponseDto updateAddressById(String id, AddressRequestDto request) {
         var addressDomain = addressMapper.fromRequestToAddressDomain(request);
-        var newAddress = updateAddressCase.run(id, addressDomain);
-        return newAddress;
+        return updateAddressCase.run(id, addressDomain);
     }
 
     @Override

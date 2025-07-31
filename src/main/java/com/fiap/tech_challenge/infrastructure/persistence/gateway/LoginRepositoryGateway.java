@@ -20,15 +20,17 @@ public class LoginRepositoryGateway implements LoginGateway {
 
     @Override
     public UserDomain getUserByEmail(String email) {
-        return userMapper.fromEntityToDomain(
-                userRepository.findByEmail(email)
-                        .orElseThrow(() -> new NotFoundException("User not found with E-mail: " + email))
-        );
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found with E-mail: " + email));
+        return userMapper.toDomain(user);
+
     }
 
     @Override
-    public void updatedPassword(UserDomain userEntity) {
-        var user = userMapper.toEntity(userEntity);
-        userRepository.save(user);
+    public void updatedPassword(UserDomain userDomain) {
+        var userEntity = userMapper.toEntity(userDomain);
+        userEntity.setUserIdInAddress();
+
+        userRepository.save(userEntity);
     }
 }

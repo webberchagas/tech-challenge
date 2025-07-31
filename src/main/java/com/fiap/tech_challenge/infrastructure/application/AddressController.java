@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Tag(name = "Address Management", description = "Address creation, editing, retrieval and deletion API")
+@Tag(name = "User Address Management", description = "User address creation, editing, retrieval and deletion API")
 public interface AddressController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

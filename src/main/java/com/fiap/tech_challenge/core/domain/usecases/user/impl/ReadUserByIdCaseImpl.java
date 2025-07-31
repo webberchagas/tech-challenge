@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
+import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.user.ReadUserByIdCase;
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 
 public class ReadUserByIdCaseImpl implements ReadUserByIdCase {
 
@@ -13,7 +13,7 @@ public class ReadUserByIdCaseImpl implements ReadUserByIdCase {
     }
 
     @Override
-    public UserResponseDto run(String id) {
+    public UserDomain run(String id) {
         return userGateway.getUserById(id);
     }
 }

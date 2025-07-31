@@ -2,7 +2,7 @@ package com.fiap.tech_challenge.core.adapters;
 
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 
 public interface AddressGateway {
 
@@ -10,7 +10,7 @@ public interface AddressGateway {
 
    void deleteAddressById(String addressId);
 
-    AddressEntity searchAddressById(String id);// talvez tenha que modificar porque esta devolvendo um entity que vem da camada do infrastructure
+    UserAddressEntity searchAddressById(String id);// talvez tenha que modificar porque esta devolvendo um entity que vem da camada do infrastructure
 
 
 

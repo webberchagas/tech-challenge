@@ -48,16 +48,12 @@ public class UserEntity {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<AddressEntity> address;
+    private List<UserAddressEntity> address;
 
     public void setUserIdInAddress() {
         if (address != null) {
             address.forEach(value -> value.setUserInAddress(this));
         }
-    }
-
-    public void createNewPassword(String newPassword) {
-        this.password = newPassword;
     }
 
 }

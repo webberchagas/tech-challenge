@@ -16,6 +16,7 @@ public class DeleteUserCaseImpl implements DeleteUserCase {
     @Override
     public void run(String id) {
         log.info("Deleting user by user id: {}", id);
+        userGateway.ensureUserIsNotRestaurantOwner(id);
         this.userGateway.deleteUser(id);
     }
 }

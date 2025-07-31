@@ -4,41 +4,39 @@ import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.AddressRepository;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
+import com.fiap.tech_challenge.infrastructure.persistence.repository.UserAddressRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AddressRepositoryGateway implements AddressGateway {
-    private final AddressRepository addressRepository;
+    private final UserAddressRepository userAddressRepository;
     private final AddressMapper addressMapper;
 
-    public AddressRepositoryGateway(AddressRepository addressRepository, AddressMapper addressMapper) {
-        this.addressRepository = addressRepository;
+    public AddressRepositoryGateway(UserAddressRepository userAddressRepository, AddressMapper addressMapper) {
+        this.userAddressRepository = userAddressRepository;
         this.addressMapper = addressMapper;
     }
 
     @Override
     public AddressResponseDto createAddress(AddressDomain addressDomain) {
         var addressEntity = addressMapper.toAddressEntity(addressDomain);
-        addressRepository.save(addressEntity);
+        userAddressRepository.save(addressEntity);
         return addressMapper.toAddressResponse(addressDomain);
     }
 
     @Override
     public void deleteAddressById(String addressId) {
-        var address = addressRepository.findById(addressId).orElseThrow(
+        var address = userAddressRepository.findById(addressId).orElseThrow(
                 () -> new NotFoundException("Address not found with ID: " + addressId)
         );
-        addressRepository.delete(address);
+        userAddressRepository.delete(address);
     }
 
     @Override
-    public AddressEntity searchAddressById(String id) {
-        var addressEntity = addressRepository.findById(id).orElseThrow(() -> new NotFoundException("Address not found with ID: " + id));
-        return addressEntity;
+    public UserAddressEntity searchAddressById(String id) {
+        return userAddressRepository.findById(id).orElseThrow(() -> new NotFoundException("Address not found with ID: " + id));
     }
 
 

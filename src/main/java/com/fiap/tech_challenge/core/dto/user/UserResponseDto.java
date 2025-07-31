@@ -8,13 +8,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Schema(description = "Response body containing user information")
-public class UserResponseDto {
+public class UserResponseDto implements Serializable {
     @Schema(description = "Unique identifier of the user", example = "u123abc456")
     private String userId;
 

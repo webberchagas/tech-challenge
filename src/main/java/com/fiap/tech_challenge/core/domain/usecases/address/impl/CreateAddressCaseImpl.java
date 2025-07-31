@@ -19,7 +19,7 @@ public class CreateAddressCaseImpl implements CreateAddressCase {
 
     @Override
     public AddressResponseDto run(String id, AddressDomain addressDomain) {
-        var user = userGateway.searchUserById(id);
+        var user = userGateway.getUserById(id);
 
         log.info("Saving address for user: {}", id);
         addressDomain.createDateAddressSave();

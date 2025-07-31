@@ -2,7 +2,7 @@ package com.fiap.tech_challenge.infrastructure.application;
 
 
 import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
-import com.fiap.tech_challenge.core.dto.user.PagedResponseDto;
+import com.fiap.tech_challenge.core.dto.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;

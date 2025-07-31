@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.address.impl;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
+import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.usecases.address.ReadAddressByUserIdCase;
-import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -18,14 +18,10 @@ public class ReadAddressByUserIdCaseImpl implements ReadAddressByUserIdCase {
     }
 
     @Override
-    public List<AddressResponseDto> run(String userId) {
+    public List<AddressDomain> run(String userId) {
         log.info("Searching for address by user ID: {}", userId);
-        var userEntity = userGateway.getUserById(userId);
-        var address = userEntity.getAddress();
-
-        return address;
+        var userDomain = userGateway.getUserById(userId);
+        return userDomain.getAddress();
     }
-
-
 
 }

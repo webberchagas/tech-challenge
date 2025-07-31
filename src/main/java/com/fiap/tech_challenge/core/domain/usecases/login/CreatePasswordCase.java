@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.login;
 
-import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
+import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 
 public interface CreatePasswordCase {
 
-    void run(ChangePasswordRequestDto request);
+    void run(LoginDomain loginDomain);
 }

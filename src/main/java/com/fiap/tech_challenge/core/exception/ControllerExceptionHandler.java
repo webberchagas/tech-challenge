@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({AlreadyRegisteredException.class, PropertyReferenceException.class})
+    @ExceptionHandler({AlreadyRegisteredException.class, PropertyReferenceException.class, InvalidUserTypeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDto handleAlreadyRegistered(RuntimeException e, WebRequest request) {
         return ExceptionDetailsFactory.createProblem(e.getClass().toString(), HttpStatus.BAD_REQUEST, e.getMessage(), request);

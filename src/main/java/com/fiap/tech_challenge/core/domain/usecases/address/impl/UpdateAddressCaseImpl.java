@@ -28,7 +28,7 @@ public class UpdateAddressCaseImpl implements UpdateAddressCase {
 
         log.info("Updating address with ID: {}", domainDataBase.getAddressId());
         domainDataBase.updateAddress(addressDomain);
-        domainDataBase.setUserInAddress(userMapper.fromEntityToDomain(addressDataBase.getUser()));
+        domainDataBase.setUserInAddress(userMapper.toDomain(addressDataBase.getUser()));
 
         return addressGateway.createAddress(domainDataBase);
     }

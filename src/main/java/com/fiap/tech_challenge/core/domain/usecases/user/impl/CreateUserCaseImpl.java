@@ -4,7 +4,6 @@ import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.user.CreateUserCase;
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,11 +19,11 @@ public class CreateUserCaseImpl implements CreateUserCase {
     }
 
     @Override
-    public UserResponseDto run(UserDomain user) {
+    public UserDomain run(UserDomain user) {
         log.info("Creating user: {}", user.getEmail());
         user.createUserSave();
-        userGateway.doesUserEmailExists(user.getEmail());
-        userGateway.doesUserDocumentNumberExists(user.getDocumentNumber());
+        userGateway.ensureUserEmailIsNotAlreadyRegistered(user.getEmail());
+        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(user.getDocumentNumber());
 
         user.getAddress().forEach(AddressDomain::createDateAddressSave);
 

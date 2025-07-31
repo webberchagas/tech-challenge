@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.address;
 
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 
 public interface ReadAddressByIdCase {
 
-    AddressEntity run(String addressId);
+    UserAddressEntity run(String addressId);
 }

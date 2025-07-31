@@ -37,6 +37,7 @@ public class UserDomain {
     }
 
     public void createNewPassword(String newPassword) {
+        this.updatedAt = LocalDateTime.now();
         this.password = newPassword;
     }
 

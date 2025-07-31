@@ -1,6 +1,7 @@
-package com.fiap.tech_challenge.core.dto.user;
+package com.fiap.tech_challenge.core.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 

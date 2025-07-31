@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.user;
 
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
+import com.fiap.tech_challenge.core.domain.model.UserDomain;
 
 public interface ReadUserByIdCase {
 
-    UserResponseDto run(String id);
+    UserDomain run(String id);
 }

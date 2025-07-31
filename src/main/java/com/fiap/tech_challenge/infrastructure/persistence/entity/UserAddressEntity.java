@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user_address")
-public class AddressEntity {
+public class UserAddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "address_id")

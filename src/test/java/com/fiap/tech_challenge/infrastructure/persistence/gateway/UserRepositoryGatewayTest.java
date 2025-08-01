@@ -8,11 +8,15 @@ import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.exception.AlreadyRegisteredException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
+import com.fiap.tech_challenge.infrastructure.persistence.repository.RestaurantRepository;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageImpl;
@@ -36,6 +40,8 @@ public class UserRepositoryGatewayTest {
     private UserRepository userRepository;
     @Mock
     private UserMapper userMapper;
+    @Mock
+    RestaurantRepository restaurantRepository;
 
     private UserGateway userGateway;
 
@@ -50,14 +56,17 @@ public class UserRepositoryGatewayTest {
     private UserType userTypeTest;
     private LocalDateTime createdAtTest;
     private LocalDateTime updatedAtTest;
-    private List<AddressEntity> entityAddressTest;
+    private List<UserAddressEntity> entityAddressTest;
     private List<AddressDomain> domainAddressTest;
     private List<AddressResponseDto> responseDtoAddressTest;
+    private final Integer page = 0;
+    private final Integer size = 2;
+    private final String sort = "name,asc";
 
     @BeforeEach
     void setup () {
         mock = MockitoAnnotations.openMocks(this);
-        userGateway = new UserRepositoryGateway(userRepository, userMapper);
+        userGateway = new UserRepositoryGateway(userRepository, userMapper, restaurantRepository);
 
         userIdTest = UUID.randomUUID().toString();
         nameTest = "John";
@@ -83,7 +92,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeDoNothingWhenEmailDoesNotExist () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
-        userGateway.doesUserEmailExists(emailTest);
+        userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest);
 
         verify(userRepository, times(1)).findByEmail(emailTest);
     }
@@ -93,7 +102,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeThrowAlreadyRegisteredExceptionWhenEmailExists () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(createUserEntity()));
 
-        assertThrows(AlreadyRegisteredException.class, () -> userGateway.doesUserEmailExists(emailTest));
+        assertThrows(AlreadyRegisteredException.class, () -> userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest));
 
         verify(userRepository, times(1)).findByEmail(emailTest);
     }
@@ -103,7 +112,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeDoNothingWhenDocumentNumberDoesNotExist () {
         when(userRepository.findByDocumentNumber(anyString())).thenReturn(Optional.empty());
 
-        userGateway.doesUserDocumentNumberExists(documentNumberTest);
+        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
 
         verify(userRepository, times(1)).findByDocumentNumber(documentNumberTest);
     }
@@ -115,7 +124,7 @@ public class UserRepositoryGatewayTest {
 
         assertThrows(
                 AlreadyRegisteredException.class,
-                () -> userGateway.doesUserDocumentNumberExists(documentNumberTest)
+                () -> userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
         );
 
         verify(userRepository, times(1)).findByDocumentNumber(documentNumberTest);
@@ -136,7 +145,6 @@ public class UserRepositoryGatewayTest {
         assertEquals(userResponseDto, createdUserResponseDto);
         verify(userRepository, times(1)).save(userEntity);
         verify(userMapper, times(1)).toEntity(userDomain);
-        verify(userMapper, times(1)).toResponseDto(userEntity);
     }
 
     @DisplayName("Deve remover um usuário")
@@ -168,13 +176,11 @@ public class UserRepositoryGatewayTest {
         var userEntity = createUserEntity();
         var userDomain = createUserDomain();
         when(userRepository.findById(any())).thenReturn(Optional.of(userEntity));
-        when(userMapper.fromEntityToDomain(any())).thenReturn(userDomain);
 
-        var returnedUserDomain = userGateway.searchUserById(userIdTest);
+        var returnedUserDomain = userGateway.getUserById(userIdTest);
 
         assertEquals(userDomain, returnedUserDomain);
         verify(userRepository, times(1)).findById(userIdTest);
-        verify(userMapper, times(1)).fromEntityToDomain(userEntity);
     }
 
     @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar usuário")
@@ -182,7 +188,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeThrowNotFoundExceptionWhenUserDoesNotExistInSearchUserById () {
         when(userRepository.findById(any())).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> userGateway.searchUserById(userIdTest));
+        assertThrows(NotFoundException.class, () -> userGateway.getUserById(userIdTest));
 
         verify(userRepository, times(1)).findById(userIdTest);
     }
@@ -199,7 +205,6 @@ public class UserRepositoryGatewayTest {
 
         assertEquals(userResponseDto, returnedUserResponseDto);
         verify(userRepository, times(1)).findById(userIdTest);
-        verify(userMapper, times(1)).toResponseDto(userEntity);
     }
 
     @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar usuário")
@@ -224,10 +229,10 @@ public class UserRepositoryGatewayTest {
         when(userRepository.findAll(any(Pageable.class))).thenReturn(userListPage);
         when(userMapper.toResponseDto(any())).thenReturn(createUserResponseDto());
 
-        var returnedUserListPage = userGateway.getAllUsers(pageable);
+        var returnedUserListPage = userGateway.getAllUsers(page, size, sort);
 
         assertEquals(userListPage.getTotalElements(), returnedUserListPage.getTotalElements());
-        assertEquals(userListPage.getTotalPages(), returnedUserListPage.getTotalPages());
+        assertEquals(userListPage.getTotalPages(), returnedUserListPage.getPage());
         verify(userRepository, times(1)).findAll(pageable);
     }
 

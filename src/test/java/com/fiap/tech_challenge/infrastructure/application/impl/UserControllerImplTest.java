@@ -3,21 +3,14 @@ package com.fiap.tech_challenge.infrastructure.application.impl;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
-import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
-import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
 import com.fiap.tech_challenge.core.domain.usecases.user.*;
 import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
-import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
-import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
 import com.fiap.tech_challenge.core.exception.ControllerExceptionHandler;
-import com.fiap.tech_challenge.core.exception.LoginFailedException;
-import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.helper.TestHelper;
-import com.fiap.tech_challenge.infrastructure.application.LoginController;
 import com.fiap.tech_challenge.infrastructure.application.UserController;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -26,28 +19,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserControllerImplTest {
+class UserControllerImplTest {
 
     @Mock
     private CreateUserCase createUserCase;
@@ -126,8 +113,7 @@ public class UserControllerImplTest {
         var userCreationRequestDto = createUserCreationRequestDto();
         var userDomain = createUserDomain();
         var userResponseDto = createUserResponseDto();
-        when(createUserCase.run(any())).thenReturn(userResponseDto);
-        when(userMapper.toDomain(any())).thenReturn(userDomain);
+        when(createUserCase.run(any())).thenReturn(userDomain);
 
         mockMvc.perform(
                 post("/api/v1/users")
@@ -137,14 +123,14 @@ public class UserControllerImplTest {
                 .andExpect(content().json(TestHelper.asJsonString(userResponseDto)));
 
         verify(createUserCase, times(1)).run(any());
-        verify(userMapper, times(1)).toDomain(any());
     }
 
     @DisplayName("Deve buscar um usuário pelo ID")
     @Test
     void shouldBeGetUserById () throws Exception {
         var userResponseDto = createUserResponseDto();
-        when(readUserByIdCase.run(anyString())).thenReturn(userResponseDto);
+        var userDomain = createUserDomain();
+        when(readUserByIdCase.run(anyString())).thenReturn(userDomain);
 
         mockMvc.perform(
                         get("/api/v1/users/" + userIdTest)
@@ -172,8 +158,7 @@ public class UserControllerImplTest {
         var userResponseDto = createUserResponseDto();
         var userUpdateRequestDto = createUserUpdateRequestDto();
         var userDomain = createUserDomain();
-        when(updateUserCase.run(anyString(), any())).thenReturn(userResponseDto);
-        when(userMapper.toDomainUpdate(any())).thenReturn(userDomain);
+        when(updateUserCase.run(anyString(), any())).thenReturn(userDomain);
 
         mockMvc.perform(
                 put("/api/v1/users/" + userIdTest)
@@ -223,17 +208,6 @@ public class UserControllerImplTest {
             userTypeTest,
             addressResponseDtoTest
         );
-    }
-
-    private Page<UserResponseDto> createUserResponseDtoPage () {
-        var userResponseDtoList = new ArrayList<UserResponseDto>();
-
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
-
-        return new PageImpl<>(userResponseDtoList);
     }
 
     private UserUpdateRequestDto createUserUpdateRequestDto () {

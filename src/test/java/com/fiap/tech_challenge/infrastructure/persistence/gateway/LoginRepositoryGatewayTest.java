@@ -5,7 +5,7 @@ import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
@@ -46,7 +46,7 @@ public class LoginRepositoryGatewayTest {
     private UserType userTypeTest;
     private LocalDateTime createdAtTest;
     private LocalDateTime updatedAtTest;
-    private List<AddressEntity> entityAddressTest;
+    private List<UserAddressEntity> entityAddressTest;
     private List<AddressDomain> domainAddressTest;
 
     @BeforeEach
@@ -71,20 +71,17 @@ public class LoginRepositoryGatewayTest {
     @Test
     void shouldBeFindUserByEmail () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(createUserEntity()));
-        when(userMapper.fromEntityToDomain(any())).thenReturn(createUserDomain());
 
         var returnedUserDomain = loginGateway.getUserByEmail(emailTest);
 
         assertEquals(UserDomain.class, returnedUserDomain.getClass());
         verify(userRepository, times(1)).findByEmail(emailTest);
-        verify(userMapper, times(1)).fromEntityToDomain(any());
     }
 
     @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar o usuário")
     @Test
     void shouldBeThrowsNotFoundExceptionWhenNotFindUserByEmail () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
-        when(userMapper.fromEntityToDomain(any())).thenReturn(createUserDomain());
 
         assertThrows(NotFoundException.class, () -> loginGateway.getUserByEmail(emailTest));
 

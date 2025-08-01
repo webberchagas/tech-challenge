@@ -7,22 +7,23 @@ import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class CreateAddressCaseImplTest {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+class CreateAddressCaseImplTest {
 
     @Mock
     private AddressGateway addressGateway;
@@ -78,7 +79,7 @@ public class CreateAddressCaseImplTest {
     @Test
     void shouldBeCreateNewAddressForUser() {
         var addressDomain = createAddressDomain();
-        when(userGateway.searchUserById(any())).thenReturn(userTest);
+        when(userGateway.getUserById(any())).thenReturn(userTest);
         when(addressGateway.createAddress(any()))
                 .thenReturn(createAddressResponseDto());
 
@@ -87,7 +88,7 @@ public class CreateAddressCaseImplTest {
         assertNotNull(addressDomain.getCreatedAt());
         assertNotNull(addressDomain.getUpdatedAt());
         assertNotNull(createdAddressDomain.getAddressId());
-        verify(userGateway, times(1)).searchUserById(any());
+        verify(userGateway, times(1)).getUserById(any());
         verify(addressGateway, times(1)).createAddress(any());
     }
 

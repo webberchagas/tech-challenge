@@ -1,27 +1,20 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
+import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.user.ReadUserByIdCase;
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class ReadUserByIdCaseImplTest {
+class ReadUserByIdCaseImplTest {
 
     @Mock
     private UserGateway userGateway;
@@ -58,21 +51,24 @@ public class ReadUserByIdCaseImplTest {
     @DisplayName("Deve buscar um usuário por ID")
     @Test
     void shouldBeFindUserById () {
-        var userResponseDto = createUserResponseDto();
-        when(userGateway.getUserById(any(String.class))).thenReturn(userResponseDto);
+        var userDomain = createUserDomain();
+        when(userGateway.getUserById(any(String.class))).thenReturn(userDomain);
 
-        assertEquals(userResponseDto, readUserByIdCase.run(userIdTest));
+        assertEquals(userDomain, readUserByIdCase.run(userIdTest));
 
         verify(userGateway, times(1)).getUserById(any(String.class));
     }
 
-    private UserResponseDto createUserResponseDto() {
-        return new UserResponseDto(
+    private UserDomain createUserDomain() {
+        return new UserDomain(
                 userIdTest,
                 nameTest,
                 emailTest,
                 documentNumberTest,
                 phoneTest,
+                null,
+                null,
+                null,
                 userTypeTest,
                 null
         );

@@ -5,7 +5,6 @@ import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
-import com.fiap.tech_challenge.core.domain.usecases.address.ReadAddressCase;
 import com.fiap.tech_challenge.core.domain.usecases.address.UpdateAddressCase;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;

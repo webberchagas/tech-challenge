@@ -1,6 +1,5 @@
 package com.fiap.tech_challenge.infrastructure.application.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
 import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
@@ -10,6 +9,7 @@ import com.fiap.tech_challenge.core.exception.LoginFailedException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.helper.TestHelper;
 import com.fiap.tech_challenge.infrastructure.application.LoginController;
+import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,12 +25,14 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class LoginControllerImplTest {
+class LoginControllerImplTest {
 
     @Mock
     private ValidateLoginCase validateLoginCase;
     @Mock
     private CreatePasswordCase createPasswordCase;
+    @Mock
+    private LoginMapper loginMapper;
 
     private MockMvc mockMvc;
 
@@ -41,9 +43,9 @@ public class LoginControllerImplTest {
     private String confirmNewPasswordTest;
 
     @BeforeEach
-    void setup () {
+    void setup() {
         mock = MockitoAnnotations.openMocks(this);
-        LoginController loginController = new LoginControllerImpl(validateLoginCase, createPasswordCase);
+        LoginController loginController = new LoginControllerImpl(validateLoginCase, createPasswordCase, loginMapper);
         mockMvc = MockMvcBuilders
                 .standaloneSetup(loginController)
                 .setControllerAdvice(new ControllerExceptionHandler())
@@ -65,7 +67,7 @@ public class LoginControllerImplTest {
 
     @DisplayName("Deve validar o login")
     @Test
-    void shouldBeValidateLogin () throws Exception {
+    void shouldBeValidateLogin() throws Exception {
         var loginRequestDto = createLoginRequestDto();
         when(validateLoginCase.run(any())).thenReturn(true);
 
@@ -80,7 +82,7 @@ public class LoginControllerImplTest {
 
     @DisplayName("Deve retornar status 404 quando lançar NotFoundException")
     @Test
-    void shouldBeReturn404StatusWhenThrowNotFoundException () throws Exception {
+    void shouldBeReturn404StatusWhenThrowNotFoundException() throws Exception {
         var loginRequestDto = createLoginRequestDto();
         when(validateLoginCase.run(any())).thenThrow(new NotFoundException(""));
 
@@ -95,7 +97,7 @@ public class LoginControllerImplTest {
 
     @DisplayName("Deve retornar status 401 quando lançar LoginFailedException")
     @Test
-    void shouldBeReturn401StatusWhenThrowLoginFailedException () throws Exception {
+    void shouldBeReturn401StatusWhenThrowLoginFailedException() throws Exception {
         var loginRequestDto = createLoginRequestDto();
         when(validateLoginCase.run(any())).thenThrow(new LoginFailedException(""));
 
@@ -110,7 +112,7 @@ public class LoginControllerImplTest {
 
     @DisplayName("Deve alterar a senha")
     @Test
-    void shouldBeChangePassword () throws Exception {
+    void shouldBeChangePassword() throws Exception {
         var changePasswordRequestDto = createChangePasswordRequestDto();
         doNothing().when(createPasswordCase).run(any());
 
@@ -123,14 +125,14 @@ public class LoginControllerImplTest {
         verify(createPasswordCase, times(1)).run(any());
     }
 
-    private LoginRequestDto createLoginRequestDto () {
+    private LoginRequestDto createLoginRequestDto() {
         return new LoginRequestDto(
                 emailTest,
                 passwordTest
         );
     }
 
-    private ChangePasswordRequestDto createChangePasswordRequestDto () {
+    private ChangePasswordRequestDto createChangePasswordRequestDto() {
         return new ChangePasswordRequestDto(
                 emailTest,
                 passwordTest,

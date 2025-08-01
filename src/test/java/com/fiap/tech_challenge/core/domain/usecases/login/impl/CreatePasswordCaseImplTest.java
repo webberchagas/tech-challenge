@@ -5,18 +5,21 @@ import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
 import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
-import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.MockitoAnnotations;
 
-public class CreatePasswordCaseImplTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+class CreatePasswordCaseImplTest {
 
     @Mock
     private LoginGateway loginGateway;
@@ -40,7 +43,7 @@ public class CreatePasswordCaseImplTest {
         confirmNewPasswordTest = "123456";
 
         mock = MockitoAnnotations.openMocks(this);
-        createPasswordCase = new CreatePasswordCaseImpl(loginGateway, loginMapper);
+        createPasswordCase = new CreatePasswordCaseImpl(loginGateway);
     }
 
     @AfterEach
@@ -51,7 +54,6 @@ public class CreatePasswordCaseImplTest {
     @DisplayName("Deve trocar senha com sucesso")
     @Test
     void shouldBeChangePasswordSuccesfully () {
-        var changePasswordRequestDto = createChangePasswordRequestDto();
         var userDomain = createUserDomain();
         var loginDomain = createLoginDomain();
         when(loginGateway.getUserByEmail(any(String.class)))
@@ -59,7 +61,7 @@ public class CreatePasswordCaseImplTest {
         when(loginMapper.toDomainPassword(any(ChangePasswordRequestDto.class)))
                 .thenReturn(loginDomain);
 
-        createPasswordCase.run(changePasswordRequestDto);
+        createPasswordCase.run(loginDomain);
 
         assertEquals(newPasswordTest, userDomain.getPassword());
         verify(loginGateway, times(1))
@@ -68,14 +70,6 @@ public class CreatePasswordCaseImplTest {
                 .updatedPassword(any());
         verify(loginMapper, times(1))
                 .toDomainPassword(any(ChangePasswordRequestDto.class));
-    }
-
-    private ChangePasswordRequestDto createChangePasswordRequestDto () {
-        return new ChangePasswordRequestDto(
-                emailTest,
-                newPasswordTest,
-                confirmNewPasswordTest
-        );
     }
 
     private LoginDomain createLoginDomain() {

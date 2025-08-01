@@ -6,28 +6,23 @@ import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.exception.AlreadyRegisteredException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
+import com.fiap.tech_challenge.infrastructure.persistence.repository.RestaurantRepository;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 @Sql(scripts = {"/db_load.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = {"/db_clean.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class UserRepositoryGatewayIT {
+class UserRepositoryGatewayIT {
 
     @Autowired
     private UserRepository userRepository;
@@ -54,12 +49,17 @@ public class UserRepositoryGatewayIT {
     private UserType userTypeTest;
     private LocalDateTime createdAtTest;
     private LocalDateTime updatedAtTest;
-    private List<AddressEntity> entityAddressTest;
+    private List<UserAddressEntity> entityAddressTest;
     private List<AddressDomain> domainAddressTest;
+    private final Integer page = 0;
+    private final Integer size = 2;
+    private final String sort = "name,asc";
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @BeforeEach
     void setup () {
-        userGateway = new UserRepositoryGateway(userRepository, userMapper);
+        userGateway = new UserRepositoryGateway(userRepository, userMapper, restaurantRepository);
 
         userIdTest = UUID.randomUUID().toString();
         nameTest = "John";
@@ -77,7 +77,7 @@ public class UserRepositoryGatewayIT {
     @DisplayName("Não deve fazer nada quando o e-mail não existir")
     @Test
     void shouldBeDoNothingWhenEmailDoesNotExist () {
-        userGateway.doesUserEmailExists(emailTest);
+        userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest);
 
     }
 
@@ -85,13 +85,13 @@ public class UserRepositoryGatewayIT {
     @Test
     void shouldBeThrowAlreadyRegisteredExceptionWhenEmailExists () {
         emailTest = "clebersilva@email.com";
-        assertThrows(AlreadyRegisteredException.class, () -> userGateway.doesUserEmailExists(emailTest));
+        assertThrows(AlreadyRegisteredException.class, () -> userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest));
     }
 
     @DisplayName("Não deve fazer nada quando o número de documento não existir")
     @Test
     void shouldBeDoNothingWhenDocumentNumberDoesNotExist () {
-        userGateway.doesUserDocumentNumberExists(documentNumberTest);
+        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
     }
 
     @DisplayName("Deve lançar exceção de AlreadyRegisteredException quando o número de documento existir")
@@ -101,7 +101,7 @@ public class UserRepositoryGatewayIT {
 
         assertThrows(
                 AlreadyRegisteredException.class,
-                () -> userGateway.doesUserDocumentNumberExists(documentNumberTest)
+                () -> userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
         );
     }
 
@@ -138,7 +138,7 @@ public class UserRepositoryGatewayIT {
     @DisplayName("Deve retornar usuário quando buscar por id")
     @Test
     void shouldBeFindUserById () {
-        var returnedUserDomain = userGateway.searchUserById("05e71b88-8d37-4e7f-a055-f3af8d249939");
+        var returnedUserDomain = userGateway.getUserById("05e71b88-8d37-4e7f-a055-f3af8d249939");
 
         assertEquals("05e71b88-8d37-4e7f-a055-f3af8d249939", returnedUserDomain.getUserId());
         assertEquals(UserType.CLIENT, returnedUserDomain.getUserType());
@@ -151,7 +151,7 @@ public class UserRepositoryGatewayIT {
     @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar usuário")
     @Test
     void shouldBeThrowNotFoundExceptionWhenUserDoesNotExistInSearchUserById () {
-        assertThrows(NotFoundException.class, () -> userGateway.searchUserById(userIdTest));
+        assertThrows(NotFoundException.class, () -> userGateway.getUserById(userIdTest));
     }
 
     @DisplayName("Deve retornar usuário quando buscar por id")
@@ -178,10 +178,10 @@ public class UserRepositoryGatewayIT {
     void shouldBeReturnUserList () {
         var pageable = PageRequest.of(0, 10);
 
-        var returnedUserListPage = userGateway.getAllUsers(pageable);
+        var returnedUserListPage = userGateway.getAllUsers(page, size, sort);
 
         assertEquals(2, returnedUserListPage.getTotalElements());
-        assertEquals(1, returnedUserListPage.getTotalPages());
+        assertEquals(1, returnedUserListPage.getPage());
     }
 
     private UserEntity createUserEntity () {

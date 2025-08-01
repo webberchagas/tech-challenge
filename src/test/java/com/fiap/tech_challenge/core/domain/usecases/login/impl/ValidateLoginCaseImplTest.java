@@ -4,7 +4,6 @@ import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
-import com.fiap.tech_challenge.core.dto.login.LoginRequestDto;
 import com.fiap.tech_challenge.core.exception.LoginFailedException;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -14,10 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-public class ValidateLoginCaseImplTest {
+class ValidateLoginCaseImplTest {
 
     @Mock
     private LoginGateway loginGateway;
@@ -34,7 +34,7 @@ public class ValidateLoginCaseImplTest {
     @BeforeEach
     void setup () {
         mock = MockitoAnnotations.openMocks(this);
-        validateLoginCase = new ValidateLoginCaseImpl(loginGateway, loginMapper);
+        validateLoginCase = new ValidateLoginCaseImpl(loginGateway);
 
         emailTest = "john@email.com";
         passwordTest = "123456";
@@ -50,9 +50,9 @@ public class ValidateLoginCaseImplTest {
     void shouldBeReturnTrueWhenLoginWithValidCredentials () {
         when(loginMapper.toDomainLogin(any())).thenReturn(createLoginDomain());
         when(loginGateway.getUserByEmail(any())).thenReturn(createUserDomain());
-        var loginRequestDto = createLoginRequestDto();
+        var loginDomain = createLoginDomain();
 
-        assertTrue(validateLoginCase.run(loginRequestDto));
+        assertTrue(validateLoginCase.run(loginDomain));
         verify(loginMapper, times(1)).toDomainLogin(any());
         verify(loginGateway, times(1)).getUserByEmail(any());
     }
@@ -63,18 +63,11 @@ public class ValidateLoginCaseImplTest {
         when(loginGateway.getUserByEmail(any())).thenReturn(createUserDomain());
         passwordTest = "password";
         when(loginMapper.toDomainLogin(any())).thenReturn(createLoginDomain());
-        var loginRequestDto = createLoginRequestDto();
+        var loginDomain = createLoginDomain();
 
-        assertThrows(LoginFailedException.class, () -> validateLoginCase.run(loginRequestDto));
+        assertThrows(LoginFailedException.class, () -> validateLoginCase.run(loginDomain));
         verify(loginMapper, times(1)).toDomainLogin(any());
         verify(loginGateway, times(1)).getUserByEmail(any());
-    }
-
-    private LoginRequestDto createLoginRequestDto () {
-        return new LoginRequestDto(
-                emailTest,
-                passwordTest
-        );
     }
 
     private LoginDomain createLoginDomain () {

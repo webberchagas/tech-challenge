@@ -5,21 +5,24 @@ import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.user.CreateUserCase;
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateUserCaseImplTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+class CreateUserCaseImplTest {
 
     @Mock
     private UserGateway userGateway;
@@ -74,16 +77,15 @@ public class CreateUserCaseImplTest {
     @DisplayName("Deve criar um novo usuário")
     @Test
     void shouldBeCreateNewUser () {
-        var userResponseDto = createUserResponseDto();
         var userDomain = createUserDomain();
-        doNothing().when(userGateway).doesUserEmailExists(any(String.class));
-        doNothing().when(userGateway).doesUserDocumentNumberExists(any(String.class));
-        when(userGateway.createUser(any())).thenReturn(userResponseDto);
+        doNothing().when(userGateway).ensureUserEmailIsNotAlreadyRegistered(any(String.class));
+        doNothing().when(userGateway).ensureUserDocumentNumberIsNotAlreadyRegistered(any(String.class));
+        when(userGateway.createUser(any())).thenReturn(userDomain);
 
-        assertEquals(userResponseDto, createUserCase.run(userDomain));
+        assertEquals(userDomain, createUserCase.run(userDomain));
 
-        verify(userGateway, times(1)).doesUserEmailExists(any());
-        verify(userGateway, times(1)).doesUserDocumentNumberExists(any());
+        verify(userGateway, times(1)).ensureUserEmailIsNotAlreadyRegistered(any());
+        verify(userGateway, times(1)).ensureUserDocumentNumberIsNotAlreadyRegistered(any());
     }
 
     private UserDomain createUserDomain () {
@@ -100,17 +102,4 @@ public class CreateUserCaseImplTest {
                 addressTest
         );
     }
-
-    private UserResponseDto createUserResponseDto () {
-        return new UserResponseDto(
-                userIdTest,
-                nameTest,
-                documentNumberTest,
-                emailTest,
-                phoneTest,
-                userTypeTest,
-                null
-        );
-    }
-
 }

@@ -5,9 +5,9 @@ import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.AddressEntity;
+import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.AddressRepository;
+import com.fiap.tech_challenge.infrastructure.persistence.repository.UserAddressRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,14 +25,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-public class AddressRepositoryGatewayTest {
+class AddressRepositoryGatewayTest {
 
     private AutoCloseable mock;
 
     private AddressRepositoryGateway addressRepositoryGateway;
 
     @Mock
-    private AddressRepository addressRepository;
+    private UserAddressRepository addressRepository;
     @Mock
     private AddressMapper addressMapper;
 
@@ -151,8 +151,8 @@ public class AddressRepositoryGatewayTest {
         verify(addressRepository, times(1)).findById(addressIdTest);
     }
 
-    private AddressEntity createAddressEntity () {
-        return new AddressEntity(
+    private UserAddressEntity createAddressEntity () {
+        return new UserAddressEntity(
                 addressIdTest,
                 streetTest,
                 numberTest,

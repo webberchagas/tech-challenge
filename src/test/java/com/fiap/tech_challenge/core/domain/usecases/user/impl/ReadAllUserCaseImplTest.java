@@ -1,26 +1,25 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
 import com.fiap.tech_challenge.core.adapters.UserGateway;
+import com.fiap.tech_challenge.core.domain.model.PageResultDomain;
+import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.user.ReadAllUserCase;
-import com.fiap.tech_challenge.core.domain.usecases.user.ReadUserByIdCase;
-import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class ReadAllUserCaseImplTest {
+class ReadAllUserCaseImplTest {
 
     @Mock
     private UserGateway userGateway;
@@ -35,9 +34,13 @@ public class ReadAllUserCaseImplTest {
     private String documentNumberTest;
     private String phoneTest;
     private UserType userTypeTest;
+    private final Integer page = 0;
+    private final Integer size = 2;
+    private final String sort = "name,asc";
+
 
     @BeforeEach
-    void setup () {
+    void setup() {
         mock = MockitoAnnotations.openMocks(this);
         readAllUserCase = new ReadAllUserCaseImpl(userGateway);
 
@@ -50,86 +53,89 @@ public class ReadAllUserCaseImplTest {
     }
 
     @AfterEach
-    void tearDown () throws Exception {
+    void tearDown() throws Exception {
         mock.close();
     }
 
     @DisplayName("Deve buscar todos os usuários paginados")
     @Test
     void shouldBeGetAllUsersPaginated () {
-        var userResponseDtoPage = createUserResponseDtoPage();
-        when(userGateway.getAllUsers(any(Pageable.class))).thenReturn(userResponseDtoPage);
+        var userPage = createPage();
+        when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, "name,asc"));
+        assertEquals(userPage, readAllUserCase.run(0, 10, "name,asc"));
 
-        verify(userGateway, times(1)).getAllUsers(any(Pageable.class));
+        verify(userGateway, times(1)).getAllUsers(page, size, sort);
     }
 
     @DisplayName("Deve buscar todos os usuários paginados sem sort")
     @Test
-    void shouldBeGetAllUsersPaginatedWithoutSort () {
-        var userResponseDtoPage = createUserResponseDtoPage();
-        when(userGateway.getAllUsers(any(Pageable.class))).thenReturn(userResponseDtoPage);
+    void shouldBeGetAllUsersPaginatedWithoutSort() {
+        var userResponseDtoPage = createPage();
+        when(userGateway.getAllUsers(page, size, null)).thenReturn(userResponseDtoPage);
 
         assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, null));
 
-        verify(userGateway, times(1)).getAllUsers(any(Pageable.class));
+        verify(userGateway, times(1)).getAllUsers(page, size, null);
     }
 
     @DisplayName("Deve buscar todos os usuários paginados com sort vazio")
     @Test
-    void shouldBeGetAllUsersPaginatedWithEmptySort () {
-        var userResponseDtoPage = createUserResponseDtoPage();
-        when(userGateway.getAllUsers(any(Pageable.class))).thenReturn(userResponseDtoPage);
+    void shouldBeGetAllUsersPaginatedWithEmptySort() {
+        var userPage = createPage();
+        when(userGateway.getAllUsers(page, size, "")).thenReturn(userPage);
 
-        assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, ""));
+        assertEquals(userPage, readAllUserCase.run(0, 10, ""));
 
-        verify(userGateway, times(1)).getAllUsers(any(Pageable.class));
+        verify(userGateway, times(1)).getAllUsers(page, size, null);
     }
 
     @DisplayName("Deve buscar todos os usuários paginados com sort sem direction")
     @Test
-    void shouldBeGetAllUsersPaginatedWithSortWithoutDirection () {
-        var userResponseDtoPage = createUserResponseDtoPage();
-        when(userGateway.getAllUsers(any(Pageable.class))).thenReturn(userResponseDtoPage);
+    void shouldBeGetAllUsersPaginatedWithSortWithoutDirection() {
+        var userPage = createPage();
+        when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, "name"));
+        assertEquals(userPage, readAllUserCase.run(0, 10, "name"));
 
-        verify(userGateway, times(1)).getAllUsers(any(Pageable.class));
+        verify(userGateway, times(1)).getAllUsers(page,  size, sort);
     }
 
     @DisplayName("Deve buscar todos os usuários paginados com sort desc")
     @Test
-    void shouldBeGetAllUsersPaginatedWithDescSort () {
-        var userResponseDtoPage = createUserResponseDtoPage();
-        when(userGateway.getAllUsers(any(Pageable.class))).thenReturn(userResponseDtoPage);
+    void shouldBeGetAllUsersPaginatedWithDescSort() {
+        var userPage = createPage();
+        when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, "name,desc"));
+        assertEquals(userPage, readAllUserCase.run(0, 10, "name,desc"));
 
-        verify(userGateway, times(1)).getAllUsers(any(Pageable.class));
+        verify(userGateway, times(1)).getAllUsers(page, size, sort);
     }
 
-    private UserResponseDto createUserResponseDto() {
-        return new UserResponseDto(
+    private UserDomain createUserDomain() {
+        return new UserDomain(
                 userIdTest,
                 nameTest,
                 emailTest,
                 documentNumberTest,
                 phoneTest,
+                null,
+                null,
+                null,
                 userTypeTest,
                 null
         );
     }
 
-    private Page<UserResponseDto> createUserResponseDtoPage() {
-        var userResponseDtoList = new ArrayList<UserResponseDto>();
+    private PageResultDomain<UserDomain> createPage() {
+        var userList = new ArrayList<UserDomain>();
 
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
-        userResponseDtoList.add(createUserResponseDto());
+        userList.add(createUserDomain());
+        userList.add(createUserDomain());
+        userList.add(createUserDomain());
+        userList.add(createUserDomain());
 
-        return new PageImpl<>(userResponseDtoList);
+        return new PageResultDomain<>(userList, page, size, 4);
     }
 
 }

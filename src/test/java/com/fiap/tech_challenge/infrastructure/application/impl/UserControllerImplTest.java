@@ -113,6 +113,8 @@ class UserControllerImplTest {
         var userCreationRequestDto = createUserCreationRequestDto();
         var userDomain = createUserDomain();
         var userResponseDto = createUserResponseDto();
+        when(userMapper.toDomain(any(UserCreationRequestDto.class))).thenReturn(userDomain);
+        when(userMapper.toResponseDto(any(UserDomain.class))).thenReturn(userResponseDto);
         when(createUserCase.run(any())).thenReturn(userDomain);
 
         mockMvc.perform(
@@ -131,6 +133,7 @@ class UserControllerImplTest {
         var userResponseDto = createUserResponseDto();
         var userDomain = createUserDomain();
         when(readUserByIdCase.run(anyString())).thenReturn(userDomain);
+        when(userMapper.toResponseDto(any(UserDomain.class))).thenReturn(userResponseDto);
 
         mockMvc.perform(
                         get("/api/v1/users/" + userIdTest)
@@ -158,7 +161,10 @@ class UserControllerImplTest {
         var userResponseDto = createUserResponseDto();
         var userUpdateRequestDto = createUserUpdateRequestDto();
         var userDomain = createUserDomain();
+        addressResponseDtoTest = null;
         when(updateUserCase.run(anyString(), any())).thenReturn(userDomain);
+        when(userMapper.toDomainUpdate(any(UserUpdateRequestDto.class))).thenReturn(userDomain);
+        when(userMapper.toResponseDtoWithoutAddress(any(UserDomain.class))).thenReturn(userResponseDto);
 
         mockMvc.perform(
                 put("/api/v1/users/" + userIdTest)
@@ -169,6 +175,7 @@ class UserControllerImplTest {
 
         verify(updateUserCase, times(1)).run(anyString(), any());
         verify(userMapper, times(1)).toDomainUpdate(any());
+        verify(userMapper, times(1)).toResponseDtoWithoutAddress(any());
     }
 
     private UserCreationRequestDto createUserCreationRequestDto () {

@@ -21,8 +21,6 @@ class ValidateLoginCaseImplTest {
 
     @Mock
     private LoginGateway loginGateway;
-    @Mock
-    private LoginMapper loginMapper;
 
     private ValidateLoginCase validateLoginCase;
 
@@ -48,12 +46,10 @@ class ValidateLoginCaseImplTest {
     @DisplayName("Deve retornar true quando realizar login com as credenciais válidas")
     @Test
     void shouldBeReturnTrueWhenLoginWithValidCredentials () {
-        when(loginMapper.toDomainLogin(any())).thenReturn(createLoginDomain());
         when(loginGateway.getUserByEmail(any())).thenReturn(createUserDomain());
         var loginDomain = createLoginDomain();
 
         assertTrue(validateLoginCase.run(loginDomain));
-        verify(loginMapper, times(1)).toDomainLogin(any());
         verify(loginGateway, times(1)).getUserByEmail(any());
     }
 
@@ -62,11 +58,9 @@ class ValidateLoginCaseImplTest {
     void shouldBeThrowLoginFailedExceptionWhenLoginWithInvalidCredentials () {
         when(loginGateway.getUserByEmail(any())).thenReturn(createUserDomain());
         passwordTest = "password";
-        when(loginMapper.toDomainLogin(any())).thenReturn(createLoginDomain());
         var loginDomain = createLoginDomain();
 
         assertThrows(LoginFailedException.class, () -> validateLoginCase.run(loginDomain));
-        verify(loginMapper, times(1)).toDomainLogin(any());
         verify(loginGateway, times(1)).getUserByEmail(any());
     }
 

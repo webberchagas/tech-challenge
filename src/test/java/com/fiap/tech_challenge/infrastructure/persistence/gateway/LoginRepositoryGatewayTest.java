@@ -9,6 +9,7 @@ import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEnti
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,14 +68,21 @@ public class LoginRepositoryGatewayTest {
         domainAddressTest = new ArrayList<>();
     }
 
+    @AfterEach
+    void tearDown() throws Exception {
+        mock.close();
+    }
+
     @DisplayName("Deve retornar o usuário pelo e-mail")
     @Test
     void shouldBeFindUserByEmail () {
+        var userDomain = createUserDomain();
+        when(userMapper.toDomain(any(UserEntity.class))).thenReturn(userDomain);
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(createUserEntity()));
 
         var returnedUserDomain = loginGateway.getUserByEmail(emailTest);
 
-        assertEquals(UserDomain.class, returnedUserDomain.getClass());
+        assertEquals(userDomain, returnedUserDomain);
         verify(userRepository, times(1)).findByEmail(emailTest);
     }
 

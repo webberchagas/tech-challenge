@@ -34,9 +34,9 @@ class ReadAllUserCaseImplTest {
     private String documentNumberTest;
     private String phoneTest;
     private UserType userTypeTest;
-    private final Integer page = 0;
-    private final Integer size = 2;
-    private final String sort = "name,asc";
+    private Integer page = 0;
+    private Integer size = 2;
+    private String sort = "name,asc";
 
 
     @BeforeEach
@@ -63,7 +63,7 @@ class ReadAllUserCaseImplTest {
         var userPage = createPage();
         when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userPage, readAllUserCase.run(0, 10, "name,asc"));
+        assertEquals(userPage, readAllUserCase.run(page, size, sort));
 
         verify(userGateway, times(1)).getAllUsers(page, size, sort);
     }
@@ -72,9 +72,10 @@ class ReadAllUserCaseImplTest {
     @Test
     void shouldBeGetAllUsersPaginatedWithoutSort() {
         var userResponseDtoPage = createPage();
-        when(userGateway.getAllUsers(page, size, null)).thenReturn(userResponseDtoPage);
+        sort = null;
+        when(userGateway.getAllUsers(page, size, sort)).thenReturn(userResponseDtoPage);
 
-        assertEquals(userResponseDtoPage, readAllUserCase.run(0, 10, null));
+        assertEquals(userResponseDtoPage, readAllUserCase.run(page, size, sort));
 
         verify(userGateway, times(1)).getAllUsers(page, size, null);
     }
@@ -83,20 +84,22 @@ class ReadAllUserCaseImplTest {
     @Test
     void shouldBeGetAllUsersPaginatedWithEmptySort() {
         var userPage = createPage();
-        when(userGateway.getAllUsers(page, size, "")).thenReturn(userPage);
+        sort = "";
+        when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userPage, readAllUserCase.run(0, 10, ""));
+        assertEquals(userPage, readAllUserCase.run(page, size, sort));
 
-        verify(userGateway, times(1)).getAllUsers(page, size, null);
+        verify(userGateway, times(1)).getAllUsers(page, size, sort);
     }
 
     @DisplayName("Deve buscar todos os usuários paginados com sort sem direction")
     @Test
     void shouldBeGetAllUsersPaginatedWithSortWithoutDirection() {
         var userPage = createPage();
+        sort = "name";
         when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userPage, readAllUserCase.run(0, 10, "name"));
+        assertEquals(userPage, readAllUserCase.run(page, size, sort));
 
         verify(userGateway, times(1)).getAllUsers(page,  size, sort);
     }
@@ -105,9 +108,10 @@ class ReadAllUserCaseImplTest {
     @Test
     void shouldBeGetAllUsersPaginatedWithDescSort() {
         var userPage = createPage();
+        sort = "name,desc";
         when(userGateway.getAllUsers(page, size, sort)).thenReturn(userPage);
 
-        assertEquals(userPage, readAllUserCase.run(0, 10, "name,desc"));
+        assertEquals(userPage, readAllUserCase.run(page, size, sort));
 
         verify(userGateway, times(1)).getAllUsers(page, size, sort);
     }

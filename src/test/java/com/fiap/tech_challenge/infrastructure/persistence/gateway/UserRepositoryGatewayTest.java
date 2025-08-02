@@ -130,21 +130,22 @@ public class UserRepositoryGatewayTest {
         verify(userRepository, times(1)).findByDocumentNumber(documentNumberTest);
     }
 
-    @DisplayName("Deve retornar o UserResponseDto ao criar um novo usuário")
+    @DisplayName("Deve retornar o UserDomain ao criar um novo usuário")
     @Test
     void shouldBeReturnUserResponseDtoWhenCreateNewUser () {
         var userResponseDto = createUserResponseDto();
         var userEntity = createUserEntity();
         var userDomain = createUserDomain();
-        when(userMapper.toEntity(any())).thenReturn(userEntity);
-        when(userRepository.save(any())).thenReturn(userEntity);
-        when(userMapper.toResponseDto(any())).thenReturn(userResponseDto);
+        when(userMapper.toEntity(userDomain)).thenReturn(userEntity);
+        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
+        when(userMapper.toDomain(any(UserEntity.class))).thenReturn(userDomain);
 
-        var createdUserResponseDto = userGateway.createUser(userDomain);
+        var createdUserDomain = userGateway.createUser(userDomain);
 
-        assertEquals(userResponseDto, createdUserResponseDto);
+        assertEquals(userDomain, createdUserDomain);
         verify(userRepository, times(1)).save(userEntity);
         verify(userMapper, times(1)).toEntity(userDomain);
+        verify(userMapper, times(1)).toDomain(any(UserEntity.class));
     }
 
     @DisplayName("Deve remover um usuário")
@@ -172,39 +173,17 @@ public class UserRepositoryGatewayTest {
 
     @DisplayName("Deve retornar usuário quando buscar por id")
     @Test
-    void shouldBeFindUserById () {
+    void shouldBeGetUserById () {
         var userEntity = createUserEntity();
         var userDomain = createUserDomain();
         when(userRepository.findById(any())).thenReturn(Optional.of(userEntity));
+        when(userMapper.toDomain(any(UserEntity.class))).thenReturn(userDomain);
 
         var returnedUserDomain = userGateway.getUserById(userIdTest);
 
         assertEquals(userDomain, returnedUserDomain);
         verify(userRepository, times(1)).findById(userIdTest);
-    }
-
-    @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar usuário")
-    @Test
-    void shouldBeThrowNotFoundExceptionWhenUserDoesNotExistInSearchUserById () {
-        when(userRepository.findById(any())).thenReturn(Optional.empty());
-
-        assertThrows(NotFoundException.class, () -> userGateway.getUserById(userIdTest));
-
-        verify(userRepository, times(1)).findById(userIdTest);
-    }
-
-    @DisplayName("Deve retornar usuário quando buscar por id")
-    @Test
-    void shouldBeGetUserById () {
-        var userEntity = createUserEntity();
-        var userResponseDto = createUserResponseDto();
-        when(userRepository.findById(any())).thenReturn(Optional.of(userEntity));
-        when(userMapper.toResponseDto(any())).thenReturn(userResponseDto);
-
-        var returnedUserResponseDto = userGateway.getUserById(userIdTest);
-
-        assertEquals(userResponseDto, returnedUserResponseDto);
-        verify(userRepository, times(1)).findById(userIdTest);
+        verify(userMapper, times(1)).toDomain(userEntity);
     }
 
     @DisplayName("Deve lançar exceção de NotFoundException quando não encontrar usuário")
@@ -225,15 +204,14 @@ public class UserRepositoryGatewayTest {
         userList.add(createUserEntity());
         userList.add(createUserEntity());
         var userListPage = new PageImpl<>(userList);
-        var pageable = PageRequest.of(0, 10);
         when(userRepository.findAll(any(Pageable.class))).thenReturn(userListPage);
-        when(userMapper.toResponseDto(any())).thenReturn(createUserResponseDto());
+        when(userMapper.toDomain(any(UserEntity.class))).thenReturn(createUserDomain());
 
         var returnedUserListPage = userGateway.getAllUsers(page, size, sort);
 
         assertEquals(userListPage.getTotalElements(), returnedUserListPage.getTotalElements());
-        assertEquals(userListPage.getTotalPages(), returnedUserListPage.getPage());
-        verify(userRepository, times(1)).findAll(pageable);
+        assertEquals(userListPage.getNumber(), returnedUserListPage.getPage());
+        verify(userRepository, times(1)).findAll(any(Pageable.class));
     }
 
     private UserEntity createUserEntity () {

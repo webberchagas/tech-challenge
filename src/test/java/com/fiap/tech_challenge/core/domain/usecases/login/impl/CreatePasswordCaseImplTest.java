@@ -4,7 +4,6 @@ import com.fiap.tech_challenge.core.adapters.LoginGateway;
 import com.fiap.tech_challenge.core.domain.model.LoginDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
-import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,17 +13,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class CreatePasswordCaseImplTest {
 
     @Mock
     private LoginGateway loginGateway;
-    @Mock
-    private LoginMapper loginMapper;
 
     private AutoCloseable mock;
 
@@ -58,8 +52,7 @@ class CreatePasswordCaseImplTest {
         var loginDomain = createLoginDomain();
         when(loginGateway.getUserByEmail(any(String.class)))
                 .thenReturn(userDomain);
-        when(loginMapper.toDomainPassword(any(ChangePasswordRequestDto.class)))
-                .thenReturn(loginDomain);
+        doNothing().when(loginGateway).updatedPassword(any());
 
         createPasswordCase.run(loginDomain);
 
@@ -68,8 +61,6 @@ class CreatePasswordCaseImplTest {
                 .getUserByEmail(any());
         verify(loginGateway, times(1))
                 .updatedPassword(any());
-        verify(loginMapper, times(1))
-                .toDomainPassword(any(ChangePasswordRequestDto.class));
     }
 
     private LoginDomain createLoginDomain() {

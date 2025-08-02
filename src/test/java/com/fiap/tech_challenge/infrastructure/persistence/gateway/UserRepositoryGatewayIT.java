@@ -78,7 +78,6 @@ class UserRepositoryGatewayIT {
     @Test
     void shouldBeDoNothingWhenEmailDoesNotExist () {
         userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest);
-
     }
 
     @DisplayName("Deve lançar exceção de AlreadyRegisteredException quando e-mail já existir")
@@ -176,12 +175,10 @@ class UserRepositoryGatewayIT {
     @DisplayName("Deve retornar uma lista de usuários")
     @Test
     void shouldBeReturnUserList () {
-        var pageable = PageRequest.of(0, 10);
-
         var returnedUserListPage = userGateway.getAllUsers(page, size, sort);
 
         assertEquals(2, returnedUserListPage.getTotalElements());
-        assertEquals(1, returnedUserListPage.getPage());
+        assertEquals(0, returnedUserListPage.getPage());
     }
 
     private UserEntity createUserEntity () {

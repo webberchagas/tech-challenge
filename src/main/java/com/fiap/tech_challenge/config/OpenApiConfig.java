@@ -14,6 +14,7 @@ import com.fiap.tech_challenge.core.domain.usecases.login.impl.CreatePasswordCas
 import com.fiap.tech_challenge.core.domain.usecases.login.impl.ValidateLoginCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.menu.impl.CreateMenuItemCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.menu.impl.DeleteMenuItemCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.menu.impl.ReadAllMenuItemCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.menu.impl.ReadMenuItemByIdCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.ReadRestaurantByIdCase;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.impl.CreateRestaurantCaseImpl;
@@ -147,5 +148,10 @@ public class OpenApiConfig {
     @Bean
     public DeleteMenuItemCaseImpl deleteMenuItemCase(MenuItemGateway menuItemGateway) {
         return new DeleteMenuItemCaseImpl(menuItemGateway);
+    }
+
+    @Bean
+    public ReadAllMenuItemCaseImpl readAllMenuItemCase(MenuItemGateway menuItemGateway) {
+        return new ReadAllMenuItemCaseImpl(menuItemGateway);
     }
 }

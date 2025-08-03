@@ -3,6 +3,7 @@ package com.fiap.tech_challenge.core.application;
 import com.fiap.tech_challenge.core.dto.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemRequestDto;
+import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseAllDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,10 +54,10 @@ public interface MenuItemController {
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    PagedResponseDto<MenuItemResponseDto> getAllMenuItemsByRestaurantId(@Parameter(description = "Page number") @RequestParam(defaultValue = "0") @Min(0) Integer page,
-                                                              @Parameter(description = "Page size") @RequestParam(defaultValue = "10") @Min(1) Integer size,
-                                                              @Parameter(description = "Sort criteria, example: name")
-                                      @RequestParam(defaultValue = "restaurantName,asc") String sort
+    PagedResponseDto<MenuItemResponseAllDto> getAllMenuItemsByRestaurantId(@Parameter String id, @Parameter(description = "Page number") @RequestParam(defaultValue = "0") @Min(0) Integer page,
+                                                                           @Parameter(description = "Page size") @RequestParam(defaultValue = "10") @Min(1) Integer size,
+                                                                           @Parameter(description = "Sort criteria, example: name")
+                                      @RequestParam(defaultValue = "name,asc") String sort
     );
 
     @PutMapping("/{id}")

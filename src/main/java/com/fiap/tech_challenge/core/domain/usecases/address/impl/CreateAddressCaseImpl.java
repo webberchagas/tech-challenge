@@ -4,7 +4,6 @@ import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
-import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,7 +17,7 @@ public class CreateAddressCaseImpl implements CreateAddressCase {
     }
 
     @Override
-    public AddressResponseDto run(String id, AddressDomain addressDomain) {
+    public AddressDomain run(String id, AddressDomain addressDomain) {
         var user = userGateway.getUserById(id);
 
         log.info("Saving address for user: {}", id);

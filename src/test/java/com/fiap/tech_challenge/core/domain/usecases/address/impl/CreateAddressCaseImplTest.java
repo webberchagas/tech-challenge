@@ -6,7 +6,6 @@ import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.domain.usecases.address.CreateAddressCase;
-import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.any;
@@ -48,7 +46,7 @@ class CreateAddressCaseImplTest {
     private UserDomain userTest;
 
     @BeforeEach
-    void setup () {
+    void setup() {
         mock = MockitoAnnotations.openMocks(this);
         createAddressCase = new CreateAddressCaseImpl(addressGateway, userGateway);
 
@@ -80,14 +78,12 @@ class CreateAddressCaseImplTest {
     void shouldBeCreateNewAddressForUser() {
         var addressDomain = createAddressDomain();
         when(userGateway.getUserById(any())).thenReturn(userTest);
-        when(addressGateway.createAddress(any()))
-                .thenReturn(createAddressResponseDto());
+        when(addressGateway.createAddress(any())).thenReturn(addressDomain);
 
-        var createdAddressDomain = createAddressCase.run(userTest.getUserId(), addressDomain);
+        createAddressCase.run(userTest.getUserId(), addressDomain);
 
         assertNotNull(addressDomain.getCreatedAt());
         assertNotNull(addressDomain.getUpdatedAt());
-        assertNotNull(createdAddressDomain.getAddressId());
         verify(userGateway, times(1)).getUserById(any());
         verify(addressGateway, times(1)).createAddress(any());
     }
@@ -108,19 +104,4 @@ class CreateAddressCaseImplTest {
                 null
         );
     }
-
-    private AddressResponseDto createAddressResponseDto() {
-        return new AddressResponseDto(
-                UUID.randomUUID().toString(),
-                streetTest,
-                numberTest,
-                complementTest,
-                neighborhoodTest,
-                cityTest,
-                stateTest,
-                countryTest,
-                postalCodeTest
-        );
-    }
-
 }

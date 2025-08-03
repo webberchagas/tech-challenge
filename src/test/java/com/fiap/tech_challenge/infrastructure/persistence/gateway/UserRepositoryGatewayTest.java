@@ -11,7 +11,6 @@ import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.RestaurantRepository;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
@@ -34,14 +32,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-public class UserRepositoryGatewayTest {
+
+class UserRepositoryGatewayTest {
 
     @Mock
     private UserRepository userRepository;
     @Mock
     private UserMapper userMapper;
-    @Mock
-    RestaurantRepository restaurantRepository;
 
     private UserGateway userGateway;
 
@@ -66,7 +63,7 @@ public class UserRepositoryGatewayTest {
     @BeforeEach
     void setup () {
         mock = MockitoAnnotations.openMocks(this);
-        userGateway = new UserRepositoryGateway(userRepository, userMapper, restaurantRepository);
+        userGateway = new UserRepositoryGateway(userRepository, userMapper);
 
         userIdTest = UUID.randomUUID().toString();
         nameTest = "John";
@@ -92,7 +89,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeDoNothingWhenEmailDoesNotExist () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
-        userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest);
+        userGateway.validateUserEmailIsNotAlreadyRegistered(emailTest);
 
         verify(userRepository, times(1)).findByEmail(emailTest);
     }
@@ -102,7 +99,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeThrowAlreadyRegisteredExceptionWhenEmailExists () {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(createUserEntity()));
 
-        assertThrows(AlreadyRegisteredException.class, () -> userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest));
+        assertThrows(AlreadyRegisteredException.class, () -> userGateway.validateUserEmailIsNotAlreadyRegistered(emailTest));
 
         verify(userRepository, times(1)).findByEmail(emailTest);
     }
@@ -112,7 +109,7 @@ public class UserRepositoryGatewayTest {
     void shouldBeDoNothingWhenDocumentNumberDoesNotExist () {
         when(userRepository.findByDocumentNumber(anyString())).thenReturn(Optional.empty());
 
-        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
+        userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
 
         verify(userRepository, times(1)).findByDocumentNumber(documentNumberTest);
     }
@@ -124,7 +121,7 @@ public class UserRepositoryGatewayTest {
 
         assertThrows(
                 AlreadyRegisteredException.class,
-                () -> userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
+                () -> userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
         );
 
         verify(userRepository, times(1)).findByDocumentNumber(documentNumberTest);

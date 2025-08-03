@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.infrastructure.application.impl;
+package com.fiap.tech_challenge.core.application.impl;
 
 
 import com.fiap.tech_challenge.core.domain.usecases.user.*;
@@ -6,7 +6,7 @@ import com.fiap.tech_challenge.core.dto.PagedResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
 import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
-import com.fiap.tech_challenge.infrastructure.application.UserController;
+import com.fiap.tech_challenge.core.application.UserController;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

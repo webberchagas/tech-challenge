@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
+import com.fiap.tech_challenge.core.adapters.RestaurantGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
@@ -21,6 +22,9 @@ class UpdateUserCaseImplTest {
     @Mock
     private UserGateway userGateway;
 
+    @Mock
+    private RestaurantGateway restaurantGateway;
+
     private UpdateUserCase updateUserCase;
 
     private AutoCloseable mock;
@@ -38,7 +42,7 @@ class UpdateUserCaseImplTest {
     @BeforeEach
     void setup () {
         mock = MockitoAnnotations.openMocks(this);
-        updateUserCase = new UpdateUserCaseImpl(userGateway);
+        updateUserCase = new UpdateUserCaseImpl(userGateway, restaurantGateway);
 
         userIdTest = "0ea0d8bb-bc69-4977-b2f4-536c335fdae4";
         nameTest = "John";

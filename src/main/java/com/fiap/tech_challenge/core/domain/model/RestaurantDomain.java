@@ -21,9 +21,10 @@ public class RestaurantDomain {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public void createRestaurantSave() {
+    public void createRestaurantSave(UserDomain user) {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.user = user;
     }
 
     public void updateRestaurant(RestaurantDomain newDataRestaurantDomain) {
@@ -31,8 +32,11 @@ public class RestaurantDomain {
         this.restaurantName = newDataRestaurantDomain.getRestaurantName();
         this.cnpj = newDataRestaurantDomain.getCnpj();
         this.cuisineType = newDataRestaurantDomain.getCuisineType();
-        this.openingHours= newDataRestaurantDomain.getOpeningHours();
+        this.openingHours = newDataRestaurantDomain.getOpeningHours();
         this.user = newDataRestaurantDomain.getUser();
     }
 
+    public void setRestaurantOwner(UserDomain userDomain) {
+        this.user = userDomain;
+    }
 }

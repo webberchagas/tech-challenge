@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge.infrastructure.application;
+package com.fiap.tech_challenge.core.application;
 
 
 import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;

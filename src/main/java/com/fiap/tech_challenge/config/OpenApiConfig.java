@@ -2,6 +2,7 @@ package com.fiap.tech_challenge.config;
 
 import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.adapters.LoginGateway;
+import com.fiap.tech_challenge.core.adapters.MenuItemGateway;
 import com.fiap.tech_challenge.core.adapters.RestaurantGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.usecases.address.impl.CreateAddressCaseImpl;
@@ -11,6 +12,9 @@ import com.fiap.tech_challenge.core.domain.usecases.address.impl.ReadAddressByUs
 import com.fiap.tech_challenge.core.domain.usecases.address.impl.UpdateAddressCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.login.impl.CreatePasswordCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.login.impl.ValidateLoginCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.menu.impl.CreateMenuItemCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.menu.impl.DeleteMenuItemCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.menu.impl.ReadMenuItemByIdCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.ReadRestaurantByIdCase;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.impl.CreateRestaurantCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.impl.DeleteRestaurantCaseImpl;
@@ -22,8 +26,6 @@ import com.fiap.tech_challenge.core.domain.usecases.user.impl.DeleteUserCaseImpl
 import com.fiap.tech_challenge.core.domain.usecases.user.impl.ReadAllUserCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.user.impl.ReadUserByIdCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.user.impl.UpdateUserCaseImpl;
-import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -53,13 +55,13 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public DeleteUserCaseImpl deleteUserCase(UserGateway userGateway) {
-        return new DeleteUserCaseImpl(userGateway);
+    public DeleteUserCaseImpl deleteUserCase(UserGateway userGateway, RestaurantGateway restaurantGateway) {
+        return new DeleteUserCaseImpl(userGateway, restaurantGateway);
     }
 
     @Bean
-    public UpdateUserCaseImpl updateUserCase(UserGateway userGateway) {
-        return new UpdateUserCaseImpl(userGateway);
+    public UpdateUserCaseImpl updateUserCase(UserGateway userGateway, RestaurantGateway restaurantGateway) {
+        return new UpdateUserCaseImpl(userGateway, restaurantGateway);
     }
 
     @Bean
@@ -93,8 +95,8 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public UpdateAddressCaseImpl updateAddressCase(AddressGateway addressGateway, AddressMapper addressMapper, UserMapper userMapper) {
-        return new UpdateAddressCaseImpl(addressGateway, addressMapper, userMapper);
+    public UpdateAddressCaseImpl updateAddressCase(AddressGateway addressGateway) {
+        return new UpdateAddressCaseImpl(addressGateway);
     }
 
     @Bean
@@ -108,8 +110,8 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public CreateRestaurantCaseImpl createRestaurantCase(RestaurantGateway restaurantGateway) {
-        return CreateRestaurantCaseImpl.create(restaurantGateway);
+    public CreateRestaurantCaseImpl createRestaurantCase(RestaurantGateway restaurantGateway, UserGateway userGateway) {
+        return CreateRestaurantCaseImpl.create(restaurantGateway, userGateway);
     }
 
     @Bean
@@ -118,8 +120,8 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public UpdateRestaurantCaseImpl updateRestaurantCase(RestaurantGateway restaurantGateway) {
-        return new UpdateRestaurantCaseImpl(restaurantGateway);
+    public UpdateRestaurantCaseImpl updateRestaurantCase(RestaurantGateway restaurantGateway, UserGateway userGateway) {
+        return new UpdateRestaurantCaseImpl(restaurantGateway, userGateway);
     }
 
     @Bean
@@ -130,5 +132,20 @@ public class OpenApiConfig {
     @Bean
     public ReadAllRestaurantCaseImpl readAllRestaurantCase(RestaurantGateway restaurantGateway) {
         return new ReadAllRestaurantCaseImpl(restaurantGateway);
+    }
+
+    @Bean
+    public CreateMenuItemCaseImpl createMenuItemCase(MenuItemGateway menuItemGateway, RestaurantGateway restaurantGateway) {
+        return CreateMenuItemCaseImpl.create(menuItemGateway, restaurantGateway);
+    }
+
+    @Bean
+    public ReadMenuItemByIdCaseImpl readMenuItemByIdCase(MenuItemGateway menuItemGateway) {
+        return new ReadMenuItemByIdCaseImpl(menuItemGateway);
+    }
+
+    @Bean
+    public DeleteMenuItemCaseImpl deleteMenuItemCase(MenuItemGateway menuItemGateway) {
+        return new DeleteMenuItemCaseImpl(menuItemGateway);
     }
 }

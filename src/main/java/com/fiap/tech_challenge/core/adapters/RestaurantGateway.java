@@ -11,5 +11,5 @@ public interface RestaurantGateway {
     PageResultDomain<RestaurantDomain> getAllRestaurants(Integer page, Integer size, String sort);
     void ensureCnpjIsNotAlreadyRegistered(String cnpj);
     void deleteRestaurant(String id);
-
+    void validateUserIsNotRestaurantOwner(String userId);
 }

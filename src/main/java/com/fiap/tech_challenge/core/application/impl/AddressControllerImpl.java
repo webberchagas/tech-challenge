@@ -1,8 +1,8 @@
-package com.fiap.tech_challenge.infrastructure.application.impl;
+package com.fiap.tech_challenge.core.application.impl;
 
 import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
-import com.fiap.tech_challenge.infrastructure.application.AddressController;
+import com.fiap.tech_challenge.core.application.AddressController;
 import com.fiap.tech_challenge.core.domain.usecases.address.*;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class AddressControllerImpl implements AddressController {
     @Override
     public AddressResponseDto getAddressById(String id) {
         var address = readAddressByIdCase.run(id);
-        return addressMapper.fromEntitytoResponse(address);
+        return addressMapper.toAddressResponse(address);
     }
 
     @Override
@@ -37,14 +37,16 @@ public class AddressControllerImpl implements AddressController {
 
     @Override
     public AddressResponseDto createAddress(String userId, AddressRequestDto request) {
-        var addressDomain = addressMapper.fromRequestToAddressDomain(request);
-        return createAddressCase.run(userId,addressDomain);
+        var addressRequestDomain = addressMapper.fromRequestToAddressDomain(request);
+        var addressDomain =  createAddressCase.run(userId, addressRequestDomain);
+        return addressMapper.toAddressResponse(addressDomain);
     }
 
     @Override
     public AddressResponseDto updateAddressById(String id, AddressRequestDto request) {
-        var addressDomain = addressMapper.fromRequestToAddressDomain(request);
-        return updateAddressCase.run(id, addressDomain);
+        var addressRequestDomain = addressMapper.fromRequestToAddressDomain(request);
+        var addressDomain = updateAddressCase.run(id, addressRequestDomain);
+        return addressMapper.toAddressResponse(addressDomain);
     }
 
     @Override

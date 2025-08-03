@@ -1,5 +1,6 @@
-package com.fiap.tech_challenge.infrastructure.application.impl;
+package com.fiap.tech_challenge.core.application.impl;
 
+import com.fiap.tech_challenge.core.application.LoginController;
 import com.fiap.tech_challenge.core.domain.usecases.login.CreatePasswordCase;
 import com.fiap.tech_challenge.core.domain.usecases.login.ValidateLoginCase;
 import com.fiap.tech_challenge.core.dto.login.ChangePasswordRequestDto;
@@ -8,7 +9,6 @@ import com.fiap.tech_challenge.core.exception.ControllerExceptionHandler;
 import com.fiap.tech_challenge.core.exception.LoginFailedException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.helper.TestHelper;
-import com.fiap.tech_challenge.infrastructure.application.LoginController;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.LoginMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

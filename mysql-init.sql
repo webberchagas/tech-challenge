@@ -56,7 +56,20 @@ CREATE TABLE restaurants(
         REFERENCES users (user_id)
 );
 
-
+CREATE TABLE menu_items (
+    menu_item_id CHAR(36) NOT NULL PRIMARY KEY,
+    restaurant_id CHAR(36) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(300),
+    price DECIMAL(10,2) NOT NULL,
+    available_store_only BOOLEAN NOT NULL DEFAULT TRUE,
+    photo_path VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+   CONSTRAINT fk_menu_item_restaurant
+   FOREIGN KEY (restaurant_id) REFERENCES restaurants(restaurant_id)
+       ON DELETE CASCADE
+);
 
 INSERT INTO users (user_id, name, document_number, phone, email, password, user_type, created_at, updated_at)
 VALUES ('05e71b88-8d37-4e7f-a055-f3af8d249939', 'Cleber Silva', '12345678901', '11999999999', 'clebersilva@email.com',
@@ -96,3 +109,19 @@ VALUES ('aaaa1111-aaaa-bbbb-cccc-aaaa11111111', 'Bella Massa', '12345678000199',
         '22222222-aaaa-bbbb-cccc-222222222222', '9116788f-cf9d-40e2-a06d-6f2a831ec362', NOW(),NULL),
        ('aaaa3333-aaaa-bbbb-cccc-aaaa33333333', 'Brasa Burger', '19283746000155', 'Hamburgueria', 'Qua-Dom: 18h às 00h',
         '33333333-aaaa-bbbb-cccc-333333333333', 'f4e32baf-7e6d-4a84-b2c0-91e1caae1234', NOW(),NULL);
+
+INSERT INTO menu_items (menu_item_id, restaurant_id, name, description, price, available_store_only, photo_path, created_at, updated_at)
+VALUES ('a1b2c3d4-e5f6-7890-abcd-000000000001', 'aaaa3333-aaaa-bbbb-cccc-aaaa33333333', 'Burger Clássico',
+        'Pão, carne, queijo e molho especial', 29.90, FALSE, '/images/burger_classico.jpg', NOW(), NULL),
+
+    ('a1b2c3d4-e5f6-7890-abcd-000000000002', 'aaaa1111-aaaa-bbbb-cccc-aaaa11111111', 'Pizza Margherita',
+     'Molho de tomate, muçarela e manjericão', 45.00, TRUE, '/images/pizza_margherita.jpg', NOW(), NULL),
+
+    ('a1b2c3d4-e5f6-7890-abcd-000000000003', 'aaaa3333-aaaa-bbbb-cccc-aaaa33333333', 'Tapioca com Queijo Coalho',
+     'Tapioca recheada com queijo coalho assado', 17.50, FALSE, '/images/tapioca_queijo.jpg', NOW(), NULL),
+
+    ('a1b2c3d4-e5f6-7890-abcd-000000000004', 'aaaa2222-aaaa-bbbb-cccc-aaaa22222222', 'Sushi Tradicional',
+     'Sushi de salmão com arroz e alga nori', 12.00, TRUE, '/images/sushi_tradicional.jpg', NOW(), NULL),
+
+    ('a1b2c3d4-e5f6-7890-abcd-000000000005', 'aaaa3333-aaaa-bbbb-cccc-aaaa33333333', 'Salada Caesar',
+     'Alface, croutons, queijo parmesão e molho Caesar', 22.00, FALSE, '/images/salada_caesar.jpg', NOW(), NULL);

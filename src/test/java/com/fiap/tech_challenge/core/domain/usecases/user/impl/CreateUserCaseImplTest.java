@@ -78,14 +78,14 @@ class CreateUserCaseImplTest {
     @Test
     void shouldBeCreateNewUser () {
         var userDomain = createUserDomain();
-        doNothing().when(userGateway).ensureUserEmailIsNotAlreadyRegistered(any(String.class));
-        doNothing().when(userGateway).ensureUserDocumentNumberIsNotAlreadyRegistered(any(String.class));
+        doNothing().when(userGateway).validateUserEmailIsNotAlreadyRegistered(any(String.class));
+        doNothing().when(userGateway).validateUserDocumentNumberIsNotAlreadyRegistered(any(String.class));
         when(userGateway.createUser(any())).thenReturn(userDomain);
 
         assertEquals(userDomain, createUserCase.run(userDomain));
 
-        verify(userGateway, times(1)).ensureUserEmailIsNotAlreadyRegistered(any());
-        verify(userGateway, times(1)).ensureUserDocumentNumberIsNotAlreadyRegistered(any());
+        verify(userGateway, times(1)).validateUserEmailIsNotAlreadyRegistered(any());
+        verify(userGateway, times(1)).validateUserDocumentNumberIsNotAlreadyRegistered(any());
     }
 
     private UserDomain createUserDomain () {

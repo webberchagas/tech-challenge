@@ -3,7 +3,6 @@ package com.fiap.tech_challenge.infrastructure.persistence.gateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
-import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
@@ -20,10 +19,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class AddressRepositoryGatewayTest {
 
@@ -87,17 +90,19 @@ class AddressRepositoryGatewayTest {
     @Test
     void shouldBeCreateAnAddress () {
         var addressEntity = createAddressEntity();
-        var addressResponseDto = createAddressResponseDto();
         var addressDomain = createAddressDomain();
         when(addressMapper.toAddressEntity(any())).thenReturn(addressEntity);
         when(addressRepository.save(any())).thenReturn(addressEntity);
-        when(addressMapper.toAddressResponse(any())).thenReturn(addressResponseDto);
+        when(addressMapper.toAddressDomain(any())).thenReturn(addressDomain);
 
-        var createdAddress = addressRepositoryGateway.createAddress(addressDomain);
+        var result = addressRepositoryGateway.createAddress(addressDomain);
 
-        assertEquals(addressResponseDto, createdAddress);
+        assertNotNull(result);
+        assertEquals(addressDomain.getStreet(), result.getStreet());
+        assertEquals(addressDomain.getCity(), result.getCity());
+
         verify(addressMapper, times(1)).toAddressEntity(any());
-        verify(addressMapper, times(1)).toAddressResponse(any());
+        verify(addressMapper, times(1)).toAddressDomain(any());
         verify(addressRepository, times(1)).save(any());
     }
 
@@ -105,11 +110,14 @@ class AddressRepositoryGatewayTest {
     @Test
     void shouldBeFindAndAddressWithID () {
         var addressEntity = createAddressEntity();
+        var addressDomain = createAddressDomain();
+
         when(addressRepository.findById(anyString())).thenReturn(Optional.of(addressEntity));
+        when(addressMapper.toAddressDomain(any())).thenReturn(addressDomain);
 
-        var foundAddress = addressRepositoryGateway.searchAddressById(UUID.randomUUID().toString());
+        var foundAddress = addressRepositoryGateway.findAddressById(UUID.randomUUID().toString());
 
-        assertEquals(addressEntity, foundAddress);
+        assertEquals(addressDomain, foundAddress);
         verify(addressRepository, times(1)).findById(any());
     }
 
@@ -120,7 +128,7 @@ class AddressRepositoryGatewayTest {
 
         assertThrows(
                 NotFoundException.class,
-                () -> addressRepositoryGateway.searchAddressById(UUID.randomUUID().toString())
+                () -> addressRepositoryGateway.findAddressById(UUID.randomUUID().toString())
         );
 
         verify(addressRepository, times(1)).findById(any());
@@ -184,19 +192,4 @@ class AddressRepositoryGatewayTest {
                 userTest
         );
     }
-
-    private AddressResponseDto createAddressResponseDto () {
-        return new AddressResponseDto(
-                addressIdTest,
-                streetTest,
-                numberTest,
-                complementTest,
-                neighborhoodTest,
-                cityTest,
-                stateTest,
-                countryTest,
-                postalCodeTest
-        );
-    }
-
 }

@@ -1,8 +1,8 @@
 package com.fiap.tech_challenge.core.domain.usecases.address.impl;
 
 import com.fiap.tech_challenge.core.adapters.AddressGateway;
+import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.usecases.address.ReadAddressByIdCase;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -15,8 +15,8 @@ public class ReadAddressByIdCaseImpl implements ReadAddressByIdCase {
     }
 
     @Override
-    public UserAddressEntity run(String addressId) {
+    public AddressDomain run(String addressId) {
         log.info("Searching for address by ID: {}", addressId);
-        return addressGateway.searchAddressById(addressId);
+        return addressGateway.findAddressById(addressId);
     }
 }

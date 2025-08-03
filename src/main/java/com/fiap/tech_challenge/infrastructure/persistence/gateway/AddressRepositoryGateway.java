@@ -2,9 +2,7 @@ package com.fiap.tech_challenge.infrastructure.persistence.gateway;
 
 import com.fiap.tech_challenge.core.adapters.AddressGateway;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
-import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
-import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.AddressMapper;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserAddressRepository;
 import org.springframework.stereotype.Component;
@@ -20,10 +18,10 @@ public class AddressRepositoryGateway implements AddressGateway {
     }
 
     @Override
-    public AddressResponseDto createAddress(AddressDomain addressDomain) {
+    public AddressDomain createAddress(AddressDomain addressDomain) {
         var addressEntity = addressMapper.toAddressEntity(addressDomain);
-        userAddressRepository.save(addressEntity);
-        return addressMapper.toAddressResponse(addressDomain);
+        var userAddressEntity = userAddressRepository.save(addressEntity);
+        return addressMapper.toAddressDomain(userAddressEntity);
     }
 
     @Override
@@ -35,8 +33,10 @@ public class AddressRepositoryGateway implements AddressGateway {
     }
 
     @Override
-    public UserAddressEntity searchAddressById(String id) {
-        return userAddressRepository.findById(id).orElseThrow(() -> new NotFoundException("Address not found with ID: " + id));
+    public AddressDomain findAddressById(String id) {
+         var address = userAddressRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Address not found with ID: " + id));
+        return addressMapper.toAddressDomain(address);
     }
 
 

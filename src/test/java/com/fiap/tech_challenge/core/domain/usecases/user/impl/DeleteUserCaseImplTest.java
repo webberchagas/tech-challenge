@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
+import com.fiap.tech_challenge.core.adapters.RestaurantGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.usecases.user.DeleteUserCase;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,9 @@ class DeleteUserCaseImplTest {
     @Mock
     private UserGateway userGateway;
 
+    @Mock
+    private RestaurantGateway restaurantGateway;
+
     private DeleteUserCase deleteUserCase;
 
     private AutoCloseable mock;
@@ -26,7 +30,7 @@ class DeleteUserCaseImplTest {
     @BeforeEach
     void setup() {
         mock = MockitoAnnotations.openMocks(this);
-        deleteUserCase = new DeleteUserCaseImpl(userGateway);
+        deleteUserCase = new DeleteUserCaseImpl(userGateway, restaurantGateway);
 
         userIdTest = "0ea0d8bb-bc69-4977-b2f4-536c335fdae4";
     }

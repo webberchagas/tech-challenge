@@ -8,7 +8,6 @@ import com.fiap.tech_challenge.core.exception.InvalidUserTypeException;
 import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.RestaurantRepository;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,22 +16,21 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.fiap.tech_challenge.core.domain.model.PageResultDomain.buildPageable;
+import static com.fiap.tech_challenge.core.domain.model.type.UserType.RESTAURANT_OWNER;
 
 
 @Component
 public class UserRepositoryGateway implements UserGateway {
     private final UserRepository userRepository;
-    private final RestaurantRepository restaurantRepository;
     private final UserMapper userMapper;
 
-    public UserRepositoryGateway(UserRepository userRepository, UserMapper userMapper, RestaurantRepository restaurantRepository) {
+    public UserRepositoryGateway(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
-        this.restaurantRepository = restaurantRepository;
     }
 
     @Override
-    public void ensureUserEmailIsNotAlreadyRegistered(String email) {
+    public void validateUserEmailIsNotAlreadyRegistered(String email) {
         var userEntity = userRepository.findByEmail(email);
         if (userEntity.isPresent()) {
             throw new AlreadyRegisteredException("Email already registered: " + email);
@@ -40,7 +38,7 @@ public class UserRepositoryGateway implements UserGateway {
     }
 
     @Override
-    public void ensureUserDocumentNumberIsNotAlreadyRegistered(String documentNumber) {
+    public void validateUserDocumentNumberIsNotAlreadyRegistered(String documentNumber) {
         var userEntity = userRepository.findByDocumentNumber(documentNumber);
         if (userEntity.isPresent()) {
             throw new AlreadyRegisteredException("Document number already registered: " + documentNumber);
@@ -86,20 +84,12 @@ public class UserRepositoryGateway implements UserGateway {
     }
 
     @Override
-    public UserEntity getUserOwnerRestaurantById(String id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found with ID: " + id));
-    }
+    public UserDomain findAndValidateRestaurantOwner(String userId) {
+        UserDomain user = getUserById(userId);
 
-    @Override
-    public void ensureUserIsNotRestaurantOwner(String userId) {
-        var restaurants = restaurantRepository.findByUser_UserId(userId);
-
-        if (!restaurants.isEmpty()) {
-            throw new InvalidUserTypeException(
-                    "Action not allowed. This user owns " + restaurants.size() + " restaurant(s)."
-            );
+        if (!RESTAURANT_OWNER.equals(user.getUserType())) {
+            throw new InvalidUserTypeException("User must be a restaurant owner");
         }
+        return user;
     }
-
 }

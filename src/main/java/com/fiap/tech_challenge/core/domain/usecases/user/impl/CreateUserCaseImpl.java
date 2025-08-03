@@ -22,8 +22,8 @@ public class CreateUserCaseImpl implements CreateUserCase {
     public UserDomain run(UserDomain user) {
         log.info("Creating user: {}", user.getEmail());
         user.createUserSave();
-        userGateway.ensureUserEmailIsNotAlreadyRegistered(user.getEmail());
-        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(user.getDocumentNumber());
+        userGateway.validateUserEmailIsNotAlreadyRegistered(user.getEmail());
+        userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(user.getDocumentNumber());
 
         user.getAddress().forEach(AddressDomain::createDateAddressSave);
 

@@ -14,11 +14,10 @@ public interface AddressMapper {
 
     AddressDomain fromRequestToAddressDomain(AddressRequestDto address);
     UserAddressEntity toAddressEntity(AddressDomain address);
-    AddressResponseDto fromEntitytoResponse(UserAddressEntity entity);
     AddressResponseDto toAddressResponse(AddressDomain domain);
     List<AddressResponseDto> toAddressResponseList(List<AddressDomain> domain);
 
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "user.address", ignore = true)
     AddressDomain toAddressDomain(UserAddressEntity entity);
 
 

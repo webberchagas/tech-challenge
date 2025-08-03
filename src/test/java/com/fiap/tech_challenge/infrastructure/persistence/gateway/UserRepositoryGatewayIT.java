@@ -9,7 +9,6 @@ import com.fiap.tech_challenge.core.exception.NotFoundException;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserAddressEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.UserEntity;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
-import com.fiap.tech_challenge.infrastructure.persistence.repository.RestaurantRepository;
 import com.fiap.tech_challenge.infrastructure.persistence.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
@@ -27,6 +26,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
 @Sql(scripts = {"/db_load.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -54,12 +54,11 @@ class UserRepositoryGatewayIT {
     private final Integer page = 0;
     private final Integer size = 2;
     private final String sort = "name,asc";
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+
 
     @BeforeEach
     void setup () {
-        userGateway = new UserRepositoryGateway(userRepository, userMapper, restaurantRepository);
+        userGateway = new UserRepositoryGateway(userRepository, userMapper);
 
         userIdTest = UUID.randomUUID().toString();
         nameTest = "John";
@@ -77,20 +76,20 @@ class UserRepositoryGatewayIT {
     @DisplayName("Não deve fazer nada quando o e-mail não existir")
     @Test
     void shouldBeDoNothingWhenEmailDoesNotExist () {
-        userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest);
+        userGateway.validateUserEmailIsNotAlreadyRegistered(emailTest);
     }
 
     @DisplayName("Deve lançar exceção de AlreadyRegisteredException quando e-mail já existir")
     @Test
     void shouldBeThrowAlreadyRegisteredExceptionWhenEmailExists () {
         emailTest = "clebersilva@email.com";
-        assertThrows(AlreadyRegisteredException.class, () -> userGateway.ensureUserEmailIsNotAlreadyRegistered(emailTest));
+        assertThrows(AlreadyRegisteredException.class, () -> userGateway.validateUserEmailIsNotAlreadyRegistered(emailTest));
     }
 
     @DisplayName("Não deve fazer nada quando o número de documento não existir")
     @Test
     void shouldBeDoNothingWhenDocumentNumberDoesNotExist () {
-        userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
+        userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest);
     }
 
     @DisplayName("Deve lançar exceção de AlreadyRegisteredException quando o número de documento existir")
@@ -100,7 +99,7 @@ class UserRepositoryGatewayIT {
 
         assertThrows(
                 AlreadyRegisteredException.class,
-                () -> userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
+                () -> userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(documentNumberTest)
         );
     }
 

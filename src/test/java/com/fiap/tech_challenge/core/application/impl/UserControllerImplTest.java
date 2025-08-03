@@ -1,5 +1,6 @@
-package com.fiap.tech_challenge.infrastructure.application.impl;
+package com.fiap.tech_challenge.core.application.impl;
 
+import com.fiap.tech_challenge.core.application.impl.UserControllerImpl;
 import com.fiap.tech_challenge.core.domain.model.AddressDomain;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
@@ -11,7 +12,7 @@ import com.fiap.tech_challenge.core.dto.user.UserResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
 import com.fiap.tech_challenge.core.exception.ControllerExceptionHandler;
 import com.fiap.tech_challenge.helper.TestHelper;
-import com.fiap.tech_challenge.infrastructure.application.UserController;
+import com.fiap.tech_challenge.core.application.UserController;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.UserMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

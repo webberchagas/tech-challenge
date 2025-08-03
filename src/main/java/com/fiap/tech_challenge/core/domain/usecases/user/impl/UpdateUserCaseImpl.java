@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge.core.domain.usecases.user.impl;
 
+import com.fiap.tech_challenge.core.adapters.RestaurantGateway;
 import com.fiap.tech_challenge.core.adapters.UserGateway;
 import com.fiap.tech_challenge.core.domain.model.UserDomain;
 import com.fiap.tech_challenge.core.domain.model.type.UserType;
@@ -10,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdateUserCaseImpl implements UpdateUserCase {
 
     private final UserGateway userGateway;
+    private final RestaurantGateway restaurantGateway;
 
-    public UpdateUserCaseImpl(UserGateway userGateway) {
+    public UpdateUserCaseImpl(UserGateway userGateway, RestaurantGateway restaurantGateway) {
         this.userGateway = userGateway;
+        this.restaurantGateway = restaurantGateway;
     }
 
     @Override
@@ -21,15 +24,15 @@ public class UpdateUserCaseImpl implements UpdateUserCase {
         var findUser = userGateway.getUserById(id);
 
         if (isChangingToClient(user) && isChangingType(user, findUser)) {
-            userGateway.ensureUserIsNotRestaurantOwner(id);
+            restaurantGateway.validateUserIsNotRestaurantOwner(id);
         }
 
         if (isChangingDocumentNumber(user, findUser)) {
-            userGateway.ensureUserDocumentNumberIsNotAlreadyRegistered(user.getDocumentNumber());
+            userGateway.validateUserDocumentNumberIsNotAlreadyRegistered(user.getDocumentNumber());
         }
 
         if(isChangingEmail(user, findUser)){
-            userGateway.ensureUserEmailIsNotAlreadyRegistered(user.getEmail());
+            userGateway.validateUserEmailIsNotAlreadyRegistered(user.getEmail());
         }
 
         log.info("Updating user with ID: {}", findUser.getUserId());

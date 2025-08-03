@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
-import static com.fiap.tech_challenge.core.domain.model.type.UserType.RESTAURANT_OWNER;
+import java.util.List;
 
 @Entity
 @Getter
@@ -49,13 +48,6 @@ public class RestaurantEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity user;
 
-    public void setRestaurantOwner(UserEntity userEntity) {
-        if (isRestaurantOwner(userEntity)) {
-            this.user = userEntity;
-        }
-    }
-
-    private boolean isRestaurantOwner(UserEntity userEntity) {
-        return RESTAURANT_OWNER.equals(userEntity.getUserType());
-    }
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MenuItemEntity> menuItems;
 }

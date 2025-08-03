@@ -1,10 +1,10 @@
-package com.fiap.tech_challenge.infrastructure.application.impl;
+package com.fiap.tech_challenge.core.application.impl;
 
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.*;
 import com.fiap.tech_challenge.core.dto.restaurant.RestaurantRequestDto;
 import com.fiap.tech_challenge.core.dto.restaurant.RestaurantResponseDto;
 import com.fiap.tech_challenge.core.dto.PagedResponseDto;
-import com.fiap.tech_challenge.infrastructure.application.RestaurantController;
+import com.fiap.tech_challenge.core.application.RestaurantController;
 import com.fiap.tech_challenge.infrastructure.persistence.mapper.RestaurantMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

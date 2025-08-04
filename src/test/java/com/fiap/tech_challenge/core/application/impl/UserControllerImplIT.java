@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.hasKey;
 
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = {"/db_clean.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/db_load.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/db_clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class UserControllerImplIT {
@@ -72,9 +73,9 @@ class UserControllerImplIT {
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(userCreationRequestDto)
-                .when()
+        .when()
                 .post("/api/v1/users")
-                .then()
+        .then()
                 .statusCode(HttpStatus.CREATED.value())
                 .body("$", hasKey("userId"))
                 .body("$", hasKey("name"))

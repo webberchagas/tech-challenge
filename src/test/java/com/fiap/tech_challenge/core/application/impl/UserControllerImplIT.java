@@ -5,6 +5,7 @@ import com.fiap.tech_challenge.core.domain.model.type.UserType;
 import com.fiap.tech_challenge.core.dto.address.AddressRequestDto;
 import com.fiap.tech_challenge.core.dto.address.AddressResponseDto;
 import com.fiap.tech_challenge.core.dto.user.UserCreationRequestDto;
+import com.fiap.tech_challenge.core.dto.user.UserUpdateRequestDto;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,29 +41,21 @@ class UserControllerImplIT {
     private String phoneTest;
     private String passwordTest;
     private UserType userTypeTest;
-    private LocalDateTime createdAtTest;
-    private LocalDateTime updatedAtTest;
     private List<AddressRequestDto> addressRequestDtoTest;
-    private List<AddressResponseDto> addressResponseDtoTest;
-    private List<AddressDomain> addressDomainTest;
 
     @BeforeEach
     void setup() {
         RestAssured.port = port;
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        userIdTest = UUID.randomUUID().toString();
+        userIdTest = "05e71b88-8d37-4e7f-a055-f3af8d249939";
         nameTest = "John";
         documentNumberTest = "12345678900";
         emailTest = "john@email.com";
         phoneTest = "88999999999";
         passwordTest = "password";
-        createdAtTest = LocalDateTime.now();
-        updatedAtTest = LocalDateTime.now();
         userTypeTest = UserType.CLIENT;
         addressRequestDtoTest = new ArrayList<>();
-        addressResponseDtoTest = new ArrayList<>();
-        addressDomainTest = new ArrayList<>();
     }
 
     @DisplayName("Deve criar um usuário")
@@ -86,6 +79,41 @@ class UserControllerImplIT {
                 .body("$", hasKey("address"));
     }
 
+    @DisplayName("Deve atualizar um usuário")
+    @Test
+    void shouldBeUpdateUser() {
+        var userUpdateRequestDto = createUserUpdateRequestDto();
+
+        given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(userUpdateRequestDto)
+        .when()
+                .put("/api/v1/users/" + userIdTest)
+        .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("$", hasKey("userId"))
+                .body("$", hasKey("name"))
+                .body("$", hasKey("documentNumber"))
+                .body("$", hasKey("email"))
+                .body("$", hasKey("phone"))
+                .body("$", hasKey("userType"));
+    }
+
+    @DisplayName("Deve lançar exceção quando tentar atualizar o tipo de usuário de um dono de restaurante com restaurantes cadastrado")
+    @Test
+    void shouldBeThrowExceptionWhenTryUpdateUserTypeWithRestaurantOwnerWithRegisteredRestaurants() {
+        userIdTest = "9116788f-cf9d-40e2-a06d-6f2a831ec362";
+        var userUpdateRequestDto = createUserUpdateRequestDto();
+
+        given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(userUpdateRequestDto)
+        .when()
+                .put("/api/v1/users/" + userIdTest)
+        .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
     private UserCreationRequestDto createUserCreationRequestDto() {
         return new UserCreationRequestDto(
                 nameTest,
@@ -95,6 +123,16 @@ class UserControllerImplIT {
                 passwordTest,
                 userTypeTest,
                 addressRequestDtoTest
+        );
+    }
+
+    private UserUpdateRequestDto createUserUpdateRequestDto() {
+        return new UserUpdateRequestDto(
+                nameTest,
+                documentNumberTest,
+                emailTest,
+                phoneTest,
+                userTypeTest
         );
     }
 

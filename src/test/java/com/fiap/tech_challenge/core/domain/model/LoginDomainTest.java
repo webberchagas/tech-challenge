@@ -64,12 +64,39 @@ public class LoginDomainTest {
         assertThrows(NotFoundException.class, loginDomain::validateLoginInput);
     }
 
+    @DisplayName("Deve soltar NotFoundException quando validar o login com e-mail e sem senha")
+    @Test
+    void shouldBeThrowsNotFoundExceptionWhenValidateObjectWithEmailAndWithoutPassword () {
+        passwordTest = null;
+        var loginDomain = createLoginDomain();
+
+        assertThrows(NotFoundException.class, loginDomain::validateLoginInput);
+    }
+
     @DisplayName("Deve soltar NotFoundException quando validar a troca de senha sem e-mail, senha e confirmar senha")
     @Test
     void shouldBeThrowsNotFoundExceptionWhenValidateObjectWithoutEmailAndPasswordAndConfirmNewPassword () {
         emailTest = null;
         passwordTest = null;
         confirmNewPasswordTest = null;
+        var loginDomain = createLoginDomain();
+
+        assertThrows(NotFoundException.class, loginDomain::validateChangePasswordInput);
+    }
+
+    @DisplayName("Deve soltar NotFoundException quando validar a troca de senha com e-mail, senha e sem confirmar senha")
+    @Test
+    void shouldBeThrowsNotFoundExceptionWhenValidateObjectWithEmailAndPasswordAndWithoutConfirmNewPassword () {
+        confirmNewPasswordTest = null;
+        var loginDomain = createLoginDomain();
+
+        assertThrows(NotFoundException.class, loginDomain::validateChangePasswordInput);
+    }
+
+    @DisplayName("Deve soltar NotFoundException quando validar a troca de senha com e-mail, confirmar senha e sem senha")
+    @Test
+    void shouldBeThrowsNotFoundExceptionWhenValidateObjectWithEmailAndConfirmNewPasswordAndWithoutPassword () {
+        passwordTest = null;
         var loginDomain = createLoginDomain();
 
         assertThrows(NotFoundException.class, loginDomain::validateChangePasswordInput);

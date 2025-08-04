@@ -12,10 +12,7 @@ import com.fiap.tech_challenge.core.domain.usecases.address.impl.ReadAddressByUs
 import com.fiap.tech_challenge.core.domain.usecases.address.impl.UpdateAddressCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.login.impl.CreatePasswordCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.login.impl.ValidateLoginCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.menu.impl.CreateMenuItemCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.menu.impl.DeleteMenuItemCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.menu.impl.ReadAllMenuItemCaseImpl;
-import com.fiap.tech_challenge.core.domain.usecases.menu.impl.ReadMenuItemByIdCaseImpl;
+import com.fiap.tech_challenge.core.domain.usecases.menu.impl.*;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.ReadRestaurantByIdCase;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.impl.CreateRestaurantCaseImpl;
 import com.fiap.tech_challenge.core.domain.usecases.restaurant.impl.DeleteRestaurantCaseImpl;
@@ -153,5 +150,10 @@ public class OpenApiConfig {
     @Bean
     public ReadAllMenuItemCaseImpl readAllMenuItemCase(MenuItemGateway menuItemGateway) {
         return new ReadAllMenuItemCaseImpl(menuItemGateway);
+    }
+
+    @Bean
+    public UpdateMenuItemCaseImpl updateMenuItemCase(MenuItemGateway menuItemGateway) {
+        return new UpdateMenuItemCaseImpl(menuItemGateway);
     }
 }

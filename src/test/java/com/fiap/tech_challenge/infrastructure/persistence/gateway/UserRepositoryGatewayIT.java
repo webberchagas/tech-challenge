@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @SpringBootTest
 @Transactional
-@Sql(scripts = {"/db_load.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = {"/db_clean.sql", "/db_load.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = {"/db_clean.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class UserRepositoryGatewayIT {
 
@@ -176,7 +176,7 @@ class UserRepositoryGatewayIT {
     void shouldBeReturnUserList () {
         var returnedUserListPage = userGateway.getAllUsers(page, size, sort);
 
-        assertEquals(2, returnedUserListPage.getTotalElements());
+        assertEquals(3, returnedUserListPage.getTotalElements());
         assertEquals(0, returnedUserListPage.getPage());
     }
 

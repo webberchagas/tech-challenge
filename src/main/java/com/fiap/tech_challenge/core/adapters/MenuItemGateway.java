@@ -7,6 +7,7 @@ public interface MenuItemGateway {
 
     MenuItemDomain createMenuItem(MenuItemDomain menuItem);
     MenuItemDomain readMenuItem(String id);
+    MenuItemDomain updateMenuItem(MenuItemDomain menuItem);
     PageResultDomain<MenuItemDomain> getAllMenuItemsByRestaurantId(String restaurantId, Integer page, Integer size, String sort);
     void deleteMenuItem(String id);
 

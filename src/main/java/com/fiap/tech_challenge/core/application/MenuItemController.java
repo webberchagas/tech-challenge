@@ -5,6 +5,7 @@ import com.fiap.tech_challenge.core.dto.address.ErrorResponseDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemRequestDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseAllDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseDto;
+import com.fiap.tech_challenge.core.dto.menu.MenuItemUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -70,7 +71,7 @@ public interface MenuItemController {
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
-    MenuItemResponseDto updateMenuItemById(@PathVariable String id, @RequestBody @Valid MenuItemRequestDto request);
+    MenuItemResponseDto updateMenuItemById(@PathVariable String id, @RequestBody @Valid MenuItemUpdateRequestDto request);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

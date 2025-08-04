@@ -27,4 +27,13 @@ public class MenuItemDomain {
         this.restaurant = restaurant;
     }
 
+    public void updateMenuItem(MenuItemDomain menuItemDomain) {
+        this.updatedAt = LocalDateTime.now();
+        this.name = menuItemDomain.getName();
+        this.description = menuItemDomain.getDescription();
+        this.price = menuItemDomain.getPrice();
+        this.availableInStoreOnly = menuItemDomain.isAvailableInStoreOnly();
+        this.photoPath = menuItemDomain.getPhotoPath();
+    }
+
 }

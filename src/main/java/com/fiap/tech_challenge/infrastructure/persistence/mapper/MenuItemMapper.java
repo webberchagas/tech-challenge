@@ -4,6 +4,7 @@ import com.fiap.tech_challenge.core.domain.model.MenuItemDomain;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemRequestDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseAllDto;
 import com.fiap.tech_challenge.core.dto.menu.MenuItemResponseDto;
+import com.fiap.tech_challenge.core.dto.menu.MenuItemUpdateRequestDto;
 import com.fiap.tech_challenge.infrastructure.persistence.entity.MenuItemEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,6 +13,7 @@ import org.mapstruct.Mapping;
 public interface MenuItemMapper {
 
     MenuItemDomain toDomain(MenuItemRequestDto requestDto);
+    MenuItemDomain toDomain(MenuItemUpdateRequestDto requestDto);
     MenuItemEntity toEntity(MenuItemDomain menuItemDomain);
     MenuItemResponseAllDto toResponseAllDto(MenuItemDomain menuItemDomain);
 

@@ -69,12 +69,10 @@ public class MenuItemRepositoryGateway implements MenuItemGateway {
         menuItemRepository.delete(menuItem);
     }
 
-   /*@Override
-    public RestaurantDomain updateRestaurant(String userId, RestaurantDomain updateRestaurantDomain) {
-
-        RestaurantEntity restaurantEntity = restaurantMapper.toEntity(updateRestaurantDomain);
-
-        return restaurantMapper.toDomain(restaurantRepository.save(restaurantEntity));
-    }*/
+    @Override
+    public MenuItemDomain updateMenuItem(MenuItemDomain menuItemDomain) {
+        MenuItemEntity restaurantEntity = menuItemMapper.toEntity(menuItemDomain);
+        return menuItemMapper.toDomain(menuItemRepository.save(restaurantEntity));
+    }
 
 }

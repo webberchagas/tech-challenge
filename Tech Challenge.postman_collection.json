@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6e4416e9-09d7-4c74-b0db-bca20de41d5b",
+		"_postman_id": "3a696c04-3c86-4837-b130-40f21af6bf10",
 		"name": "Tech Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43790292"
@@ -415,10 +415,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "3. Buscar usuários ordenados por nome desc - cinco por página - pag 1",
@@ -455,7 +455,7 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [
 								{
@@ -499,10 +499,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "5. Buscar usuários ordenados por e-mail asc",
@@ -527,10 +527,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "6. Tentar buscar usuários ordenados por campo invalido",
@@ -555,10 +555,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "7. Tentar buscar usuários tamanho de página zero",
@@ -583,10 +583,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "8. Tentar buscar usuários página fora do intervalo",
@@ -611,10 +611,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -959,6 +959,70 @@
 							"header": [],
 							"cookie": [],
 							"body": ""
+						},
+						{
+							"name": "9.Tentar atualizar userType para CLIENT de usuário atrelado a restaurante",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Joana Pereira\",\r\n    \"documentNumber\": \"32165498700\",\r\n    \"email\": \"joana.pereira@email.com\",\r\n    \"phone\": \"11977777777\",\r\n    \"userType\": \"CLIENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/f4e32baf-7e6d-4a84-b2c0-91e1caae1234",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"f4e32baf-7e6d-4a84-b2c0-91e1caae1234"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "10. Atualizar userType para CLIENT de usuário não atrelado a restaurante",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Cleber Silva Rodrigues\",\r\n  \"documentNumber\": \"98765432110\",\r\n  \"email\": \"clebersilvarogrigues@email.com\",\r\n  \"phone\": \"99111111111\",\r\n  \"userType\": \"CLIENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/05e71b88-8d37-4e7f-a055-f3af8d249939",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"05e71b88-8d37-4e7f-a055-f3af8d249939"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
 						}
 					]
 				},
@@ -1025,6 +1089,33 @@
 							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "3. Tentar remover usuário atrelado a restaurante",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/f4e32baf-7e6d-4a84-b2c0-91e1caae1234",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"f4e32baf-7e6d-4a84-b2c0-91e1caae1234"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
 							"body": ""
 						}
 					]
@@ -1477,7 +1568,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1485,7 +1576,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1554,7 +1645,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"street\": \"Rua XV de Novembro\",\r\n    \"number\": \"5678\",\r\n    \"complement\": \"Sala 501\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"Santos\",\r\n    \"state\": \"SP\",\r\n    \"country\": \"Brasil\",\r\n    \"postalCode\": \"01015000\"\r\n}",
+									"raw": "{\r\n    \"street\": \"Rua das Flores\",\r\n    \"number\": \"7890\",\r\n    \"complement\": \"Bloco A\",\r\n    \"neighborhood\": \"Vila Nova\",\r\n    \"city\": \"Guarulhos\",\r\n    \"state\": \"SP\",\r\n    \"country\": \"Brasil\",\r\n    \"postalCode\": \"02295000\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1562,7 +1653,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1570,7 +1661,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1594,7 +1685,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1602,7 +1693,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1626,7 +1717,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1634,7 +1725,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1658,7 +1749,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1666,7 +1757,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1690,7 +1781,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1698,7 +1789,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1722,7 +1813,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1730,7 +1821,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1754,7 +1845,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1762,7 +1853,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1786,7 +1877,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1794,7 +1885,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1818,7 +1909,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1826,7 +1917,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1850,7 +1941,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/5bf579b0-f4ef-4c7c-bd63-97f5574896d6",
+									"raw": "{{baseUrl}}/api/v1/addresses/820cc7f7-fee6-4fd5-93a5-20e4f1a271b9",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1858,7 +1949,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"5bf579b0-f4ef-4c7c-bd63-97f5574896d6"
+										"820cc7f7-fee6-4fd5-93a5-20e4f1a271b9"
 									]
 								}
 							},
@@ -1875,7 +1966,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+							"raw": "{{baseUrl}}/api/v1/addresses/44444444-aaaa-bbbb-cccc-444444444444",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1883,7 +1974,7 @@
 								"api",
 								"v1",
 								"addresses",
-								"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+								"44444444-aaaa-bbbb-cccc-444444444444"
 							]
 						}
 					},
@@ -1894,7 +1985,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/addresses/4a25c2fd-a05a-4b05-9e89-ea75a32adc29",
+									"raw": "{{baseUrl}}/api/v1/addresses/44444444-aaaa-bbbb-cccc-444444444444",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1902,7 +1993,7 @@
 										"api",
 										"v1",
 										"addresses",
-										"4a25c2fd-a05a-4b05-9e89-ea75a32adc29"
+										"44444444-aaaa-bbbb-cccc-444444444444"
 									]
 								}
 							},
@@ -2377,6 +2468,1654 @@
 							"header": [],
 							"cookie": [],
 							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Restaurantes",
+			"item": [
+				{
+					"name": "Adicionar restaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"restaurantName\": \"Sabor do Cerrado\",\n  \"cnpj\": \"98765432000199\",\n  \"cuisineType\": \"Brasileira\",\n  \"openingHours\": \"Seg a Sex das 11h às 15h, Sáb das 12h às 16h\",\n  \"address\": {\n    \"street\": \"Rua das Mangueiras\",\n    \"number\": \"456\",\n    \"complement\": \"Loja 02\",\n    \"neighborhood\": \"Centro\",\n    \"city\": \"Brasília\",\n    \"state\": \"DF\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"70040900\"\n  },\n  \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurants"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Adicionar novo restaurante",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"restaurantName\": \"Sabor do Cerrado\",\n  \"cnpj\": \"98765432000199\",\n  \"cuisineType\": \"Brasileira\",\n  \"openingHours\": \"Seg a Sex das 11h às 15h, Sáb das 12h às 16h\",\n  \"address\": {\n    \"street\": \"Rua das Mangueiras\",\n    \"number\": \"456\",\n    \"complement\": \"Loja 02\",\n    \"neighborhood\": \"Centro\",\n    \"city\": \"Brasília\",\n    \"state\": \"DF\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"70040900\"\n  },\n  \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "2. Tentar adicionar restaurante com usuário inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"restaurantName\": \"Tokyo Garden\",\n  \"cnpj\": \"56473829000177\",\n  \"cuisineType\": \"Japonesa\",\n  \"openingHours\": \"Todos os dias das 12h às 23h\",\n  \"address\": {\n    \"street\": \"Rua Augusta\",\n    \"number\": \"890\",\n    \"complement\": \"Térreo\",\n    \"neighborhood\": \"Consolação\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"01305000\"\n  },\n  \"userId\": \"9116788f-cf9d-40e2-a06d\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "3. Tentar adicionar restaurante com CNPJ já cadastrado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"restaurantName\": \"Sabor do Cerrado 2\",\n  \"cnpj\": \"98765432000199\",\n  \"cuisineType\": \"Brasileira\",\n  \"openingHours\": \"Seg a Sex das 11h às 15h, Sáb das 12h às 16h\",\n  \"address\": {\n    \"street\": \"Rua Augusta\",\n    \"number\": \"890\",\n    \"complement\": \"Térreo\",\n    \"neighborhood\": \"Consolação\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"01305000\"\n  },\n  \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar adicionar restaurante sem endereço",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"restaurantName\": \"Sabor do Cerrado 2\",\n  \"cnpj\": \"98765432000188\",\n  \"cuisineType\": \"Brasileira\",\n  \"openingHours\": \"Seg a Sex das 11h às 15h, Sáb das 12h às 16h\",\n  \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Buscar restaurantes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurants"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar todos os restaurantes sem especificar paginação ou ordenação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Buscar restaurantes - dois por página - pag 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?page=0&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Buscar restaurantes - dois por página - pag 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?page=1&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar buscar restaurante página fora do intervalo",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?page=2&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "5. Tentar buscar usuários tamanho de página zero",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?size=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Buscar restaurantes ordenados por nome desc - cinco por página - pag 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?page=0&size=5&sort=restaurantName&sort=desc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "restaurantName"
+										},
+										{
+											"key": "sort",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "7. Buscar restaurantes ordenados por nome asc - cinco por página - pag 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants?page=0&size=5&sort=restaurantName&sort=asc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "restaurantName"
+										},
+										{
+											"key": "sort",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Buscar restaurante por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurants/aaaa2222-aaaa-bbbb-cccc-aaaa22222222",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurants",
+								"aaaa2222-aaaa-bbbb-cccc-aaaa22222222"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar restaurante por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa2222-aaaa-bbbb-cccc-aaaa22222222",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa2222-aaaa-bbbb-cccc-aaaa22222222"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar buscar restaurante por ID inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa2222-22222222",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa2222-22222222"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Atualizar restaurante",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restaurantName\": \"Brasa Burger\",\n    \"cnpj\": \"19283746000155\",\n    \"cuisineType\": \"Hamburgueria\",\n    \"openingHours\": \"Qua-Dom: 18h às 00h\",\n    \"address\": {\n        \"street\": \"Rua do Comércio\",\n        \"number\": \"45B\",\n        \"complement\": \"Fundos\",\n        \"neighborhood\": \"Jardins\",\n        \"city\": \"Campinas\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"13010-110\"\n   },\n  \"userId\": \"f4e32baf-7e6d-4a84-b2c0-91e1caae1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurants",
+								"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Atualizar restaurante sem alterar as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger\",\n    \"cnpj\": \"19283746000155\",\n    \"cuisineType\": \"Hamburgueria\",\n    \"openingHours\": \"Qua-Dom: 18h às 00h\",\n    \"address\": {\n        \"street\": \"Rua do Comércio\",\n        \"number\": \"45B\",\n        \"complement\": \"Fundos\",\n        \"neighborhood\": \"Jardins\",\n        \"city\": \"Campinas\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"13010-110\"\n   },\n  \"userId\": \"f4e32baf-7e6d-4a84-b2c0-91e1caae1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Atualizar restaurante alterando todas as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger Jardim Europa\",\n    \"cnpj\": \"19283746000156\",\n    \"cuisineType\": \"Hamburgueria e Churrascaria\",\n    \"openingHours\": \"Qui-Dom: 18h às 00h\",\n    \"address\": {\n        \"street\": \"Avenida do Comércio\",\n        \"number\": \"49B\",\n        \"complement\": \"Loja dos Fundos\",\n        \"neighborhood\": \"Jardim Europa\",\n        \"city\": \"Campina Grande\",\n        \"state\": \"PB\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"13010-000\"\n   },\n  \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar atualizar restaurante removendo o cnpj",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Bella Massa\",\n    \"cuisineType\": \"Italiana\",\n    \"openingHours\": \"Seg-Sáb: 11h às 22h\",\n    \"address\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"123\",\n        \"complement\": \"Loja 1\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"01000-000\"\n    },\n    \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar atualizar restaurante removendo o nome",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cnpj\": \"19283746000156\",\n    \"cuisineType\": \"Italiana\",\n    \"openingHours\": \"Seg-Sáb: 11h às 22h\",\n    \"address\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"123\",\n        \"complement\": \"Loja 1\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"01000-000\"\n    },\n    \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "5. Tentar atualizar restaurante removendo o tipo de cozinha",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger Jardim Europa\",\n    \"cnpj\": \"19283746000156\",\n    \"openingHours\": \"Seg-Sáb: 11h às 22h\",\n    \"address\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"123\",\n        \"complement\": \"Loja 1\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"01000-000\"\n    },\n    \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "6. Tentar atualizar restaurante removendo o horário de funcionamento",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger Jardim Europa\",\n    \"cnpj\": \"19283746000156\",\n    \"cuisineType\": \"Hamburgueria e Churrascaria\",\n    \"address\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"123\",\n        \"complement\": \"Loja 1\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"01000-000\"\n    },\n    \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "7. Tentar atualizar restaurante removendo o endereço",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger Jardim Europa\",\n    \"cnpj\": \"19283746000156\",\n    \"cuisineType\": \"Hamburgueria e Churrascaria\",\n    \"openingHours\": \"Qui-Dom: 18h às 00h\",\n    \"userId\": \"9116788f-cf9d-40e2-a06d-6f2a831ec362\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "8. Tentar atualizar restaurante removendo o ID do usuário responsável",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger Jardim Europa\",\n    \"cnpj\": \"19283746000156\",\n    \"cuisineType\": \"Hamburgueria e Churrascaria\",\n    \"openingHours\": \"Qui-Dom: 18h às 00h\",\n    \"address\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"123\",\n        \"complement\": \"Loja 1\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"01000-000\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "9. Tentar atualizar restaurante com ID inválido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurantName\": \"Brasa Burger\",\n    \"cnpj\": \"19283746000155\",\n    \"cuisineType\": \"Hamburgueria\",\n    \"openingHours\": \"Qua-Dom: 18h às 00h\",\n    \"address\": {\n        \"street\": \"Rua do Comércio\",\n        \"number\": \"45B\",\n        \"complement\": \"Fundos\",\n        \"neighborhood\": \"Jardins\",\n        \"city\": \"Campinas\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\",\n        \"postalCode\": \"13010-110\"\n   },\n  \"userId\": \"f4e32baf-7e6d-4a84-b2c0-91e1caae1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa3333-aaaa-bbbb-cccc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa3333-aaaa-bbbb-cccc"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover restaurante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurants/aaaa2222-aaaa-bbbb-cccc-aaaa22222222",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurants",
+								"aaaa2222-aaaa-bbbb-cccc-aaaa22222222"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Remover restaurante",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa2222-aaaa-bbbb-cccc-aaaa22222222",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa2222-aaaa-bbbb-cccc-aaaa22222222"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar remover restaurante com ID inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/restaurants/aaaa1111-aaaa-11111111",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"restaurants",
+										"aaaa1111-aaaa-11111111"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Menus",
+			"item": [
+				{
+					"name": "Adicionar itens ao menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pizza Pepperoni\",\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"price\": 49.9,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa-bbbb-cccc-aaaa11111111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Adicionar item ao menu",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Pepperoni\",\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"price\": 49.9,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa-bbbb-cccc-aaaa11111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar adicionar item ao menu com ID restaurante inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Pepperoni\",\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"price\": 49.9,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar adicionar item ao menu sem preço",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Pepperoni\",\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa-bbbb-cccc-aaaa11111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar adicionar item ao menu sem nome",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"price\": 49.9,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa-bbbb-cccc-aaaa11111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Tentar adicionar item ao menu sem ID do restaurante",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Pepperoni\",\n  \"description\": \"Pizza clássica com molho de tomate e pepperoni\",\n  \"price\": 49.9,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/menu/mi123abc456.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Adicionar item ao menu sem informar disponibilidade de consumo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Quatro Queijos\",\n  \"description\": \"Deliciosa pizza com mussarela, provolone, gorgonzola e parmesão\",\n  \"price\": 57.5,\n  \"photoPath\": \"/images/menu/mi789xyz321.jpg\",\n  \"restaurantId\": \"aaaa1111-aaaa-bbbb-cccc-aaaa11111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar itens de menu por ID restaurante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu?restaurantId=aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar todos os itens de menu por ID restaurante sem paginação ou ordenação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu?restaurantId=aaaa3333-aaaa-bbbb-cccc-aaaa33333333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "2. Buscar itens de menu por ID restaurante - dois por página - pag 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu?restaurantId=aaaa3333-aaaa-bbbb-cccc-aaaa33333333&page=0&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "3. Buscar itens de menu por ID restaurante - dois por página - pag 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu?restaurantId=aaaa3333-aaaa-bbbb-cccc-aaaa33333333&page=1&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar buscar itens de menu página fora do intervalo",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu?restaurantId=aaaa3333-aaaa-bbbb-cccc-aaaa33333333&page=2&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "aaaa3333-aaaa-bbbb-cccc-aaaa33333333"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar itens de menu por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"a1b2c3d4-e5f6-7890-abcd-000000000001"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Buscar itens de menu por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000001"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar buscar itens de menu com ID inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-bcd-000000000001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-bcd-000000000001"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover item de menu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000003",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"a1b2c3d4-e5f6-7890-abcd-000000000003"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Remover item de menu",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000001"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Tentar remover item de menu com ID inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-000000000001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-000000000001"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Atualizar itens de menu",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pizza Margherita\",\n  \"description\": \"Molho de tomate, muçarela e manjericão\",\n  \"price\": 45,\n  \"availableInStoreOnly\": true,\n  \"photoPath\": \"/images/pizza_margherita.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"a1b2c3d4-e5f6-7890-abcd-000000000002"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1. Atualizar item de menu sem alterar as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Margherita\",\n  \"description\": \"Molho de tomate, muçarela e manjericão\",\n  \"price\": 45,\n  \"availableInStoreOnly\": true,\n  \"photoPath\": \"/images/pizza_margherita.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "2. Atualizar item de menu alterando todas as informações",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Margherita Especial\",\n  \"description\": \"Molho de tomate, muçarela, manjericão e azeitonas pretas\",\n  \"price\": 65.90,\n  \"availableInStoreOnly\": false,\n  \"photoPath\": \"/images/pizza_margherita_especial.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "3. Tentar atualizar item do menu sem nome",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"description\": \"Molho de tomate, muçarela e manjericão\",\n  \"price\": 45,\n  \"availableInStoreOnly\": true,\n  \"photoPath\": \"/images/pizza_margherita.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "4. Tentar atualizar item do menu sem preço",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Margherita\",\n  \"description\": \"Molho de tomate, muçarela e manjericão\",\n  \"availableInStoreOnly\": true,\n  \"photoPath\": \"/images/pizza_margherita.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "5. Atualizar item do menu sem foto",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Margherita\",\n  \"description\": \"Molho de tomate, muçarela e manjericão\",\n  \"price\": 45,\n  \"availableInStoreOnly\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "6. Atualizar item do menu sem descrição",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Pizza Margherita\",\n  \"price\": 45,\n  \"availableInStoreOnly\": true,\n  \"photoPath\": \"/images/pizza_margherita.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/menu/a1b2c3d4-e5f6-7890-abcd-000000000002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"a1b2c3d4-e5f6-7890-abcd-000000000002"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				}

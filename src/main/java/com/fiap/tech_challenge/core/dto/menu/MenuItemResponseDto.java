@@ -27,7 +27,7 @@ public class MenuItemResponseDto {
     private BigDecimal price;
 
     @Schema(description = "Indicates if the item is available for in-store purchase only", example = "true")
-    private boolean availableInStoreOnly;
+    private Boolean availableInStoreOnly;
 
     @Schema(description = "Path to the photo of the menu item", example = "/images/menu/mi123abc456.jpg")
     private String photoPath;

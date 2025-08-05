@@ -14,7 +14,7 @@ public class MenuItemDomain {
     private String name;
     private String description;
     private BigDecimal price;
-    private boolean availableInStoreOnly;
+    private Boolean availableInStoreOnly;
     private String photoPath;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -25,6 +25,7 @@ public class MenuItemDomain {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.restaurant = restaurant;
+        this.availableInStoreOnly = validateAvailableInStoreOnly(this.availableInStoreOnly);
     }
 
     public void updateMenuItem(MenuItemDomain menuItemDomain) {
@@ -32,8 +33,12 @@ public class MenuItemDomain {
         this.name = menuItemDomain.getName();
         this.description = menuItemDomain.getDescription();
         this.price = menuItemDomain.getPrice();
-        this.availableInStoreOnly = menuItemDomain.isAvailableInStoreOnly();
+        this.availableInStoreOnly = validateAvailableInStoreOnly(menuItemDomain.getAvailableInStoreOnly());
         this.photoPath = menuItemDomain.getPhotoPath();
+    }
+
+    private Boolean validateAvailableInStoreOnly(Boolean value){
+        return value != null ? value : true;
     }
 
 }

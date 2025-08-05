@@ -39,7 +39,7 @@ public class MenuItemEntity {
     private BigDecimal price;
 
     @Column(name = "available_store_only", nullable = false)
-    private boolean availableInStoreOnly;
+    private Boolean availableInStoreOnly;
 
     @Column(name = "photo_path")
     private String photoPath;

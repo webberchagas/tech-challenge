@@ -28,8 +28,8 @@ public class MenuItemUpdateRequestDto {
     @Schema(description = "Price of the menu item", example = "49.90")
     private BigDecimal price;
 
-    @Schema(description = "Indicates if the item is available for in-store purchase only", example = "false")
-    private boolean availableInStoreOnly;
+    @Schema(description = "Indicates if the item is available for in-store purchase only", example = "true")
+    private Boolean availableInStoreOnly;
 
     @Schema(description = "Path to the photo of the menu item", example = "/images/menu/mi123abc456.jpg")
     private String photoPath;
